@@ -14,7 +14,7 @@
     <q-drawer v-model="leftDrawerOpen" show-if-above bordered>
       <q-list>
         <q-item v-for="item in items" :key="item">
-          <q-card style="width: 100%; height: 100px;">
+          <q-card>
             {{ item }}
           </q-card>
 
