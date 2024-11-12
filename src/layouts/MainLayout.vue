@@ -12,7 +12,7 @@
         />
 
         <q-toolbar-title>
-          Deadlock Builder
+          Deadlock Builder App
         </q-toolbar-title>
 
         <div>Quasar v{{ $q.version }}</div>
