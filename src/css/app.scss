@@ -1,1 +1,11 @@
 // app global css in SCSS form
+body {
+    background-color: $dark-page;
+    font-size: large;
+    font-weight: 600;
+    font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+}
+
+.q-drawer {
+    background-color: $dark-page;
+}
