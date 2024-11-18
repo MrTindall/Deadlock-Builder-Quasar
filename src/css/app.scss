@@ -4,6 +4,7 @@ body {
     font-size: large;
     font-weight: 600;
     font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+    color: $light;
 }
 
 .q-drawer {
@@ -12,6 +13,9 @@ body {
 
 .q-card {
     width: 100%;
-    height: 100px;
+    background-color: $dark;
+}
+
+.dark-banner {
     background-color: $primary;
 }
