@@ -11,9 +11,15 @@ body {
     background-color: $dark-page;
 }
 
-.q-card {
+.q-card.hero{
     width: 100%;
     background-color: $primary-dark;
+}
+
+.q-card.item {
+    width: 300px;
+    height: 300px;
+    background-color: $dark;
 }
 
 .dark-banner {
@@ -31,8 +37,13 @@ body {
 
 .q-tab-panel {
     background-color: $primary-dark;
+    overflow-y: auto;
+    overflow-x: hidden;
 }
 
+.item-img {
+    height: 200px;
+}
 .weapon{
     background-color: $weapon;
 }
