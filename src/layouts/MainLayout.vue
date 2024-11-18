@@ -13,20 +13,27 @@
 
         <q-toolbar-title> Deadlock Builder App </q-toolbar-title>
       </q-toolbar>
-    </q-header>
+    </q-header>  
 
     <q-drawer v-model="leftDrawerOpen" show-if-above bordered>
       <q-list>
         <q-item v-for="hero in filteredHeros" :key="hero.id">
-          <q-card class="my-card">
-            <img :src= "hero.images.icon_hero_card"/>
-            <q-card-section class="dark-banner">
-              <div class="text-h6 text-center">{{hero.name}}</div>
+          <q-card class="my-card" flat bordered>
+            <q-card-section horizontal>
+              <q-img
+                class="col hero-icon-img"
+                :src= "hero.images.icon_hero_card"
+              />
+              <q-card-actions vertical class="justify-around q-px-md">
+                <div class="text-h6 text-center">{{hero.name}}</div>
+              </q-card-actions>
             </q-card-section>
           </q-card>
         </q-item>
       </q-list>
     </q-drawer>
+    
+
 
     <q-page-container>
       <router-view />

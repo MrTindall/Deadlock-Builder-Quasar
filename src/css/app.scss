@@ -19,3 +19,19 @@ body {
 .dark-banner {
     background-color: $primary;
 }
+
+.hero-icon-img {
+    height: 150px;
+}
+
+.q-tab {
+    background-color: $primary;
+    color: $light;
+}
+.q-tab.q-tab--active {
+    background-color: $accent;
+}
+
+.q-tab-panel {
+    background-color: $primary-dark;
+}
