@@ -42,6 +42,7 @@
           align="justify"
           narrow-indicator
           style="height: 50px"
+          @update:model-value="handleTabChange"
         >
           <q-tab name="build" label="Build" />
           <q-tab name="weapons" label="Weapons" />
@@ -64,13 +65,10 @@
                   class="col-xl-2 col-lg-2 col-md-3 col-sm-4 col-xs-12"
                 >
                   <q-card class="item">
-                    <img :src="item.image" class="weapon item-img"/>
+                    <img :src="item.image" class="weapon item-img" />
 
                     <q-card-section>
                       <p class="text-center">{{ item.name }}</p>
-                    </q-card-section>
-
-                    <q-card-section class="q-pt-none">
                     </q-card-section>
                   </q-card>
                 </q-item>
@@ -80,12 +78,44 @@
 
           <q-tab-panel name="vitality">
             <div class="text-h6">Vitality</div>
-            Lorem ipsum dolor sit amet consectetur adipisicing elit.
+            <div class="q-pa-md">
+              <q-list class="row items-center">
+                <q-item
+                  v-for="item in filteredItems"
+                  :key="item.id"
+                  class="col-xl-2 col-lg-2 col-md-3 col-sm-4 col-xs-12"
+                >
+                  <q-card class="item">
+                    <img :src="item.image" class="vitality item-img" />
+
+                    <q-card-section>
+                      <p class="text-center">{{ item.name }}</p>
+                    </q-card-section>
+                  </q-card>
+                </q-item>
+              </q-list>
+            </div>
           </q-tab-panel>
 
           <q-tab-panel name="spirit">
             <div class="text-h6">Spirit</div>
-            Lorem ipsum dolor sit amet consectetur adipisicing elit.
+            <div class="q-pa-md">
+              <q-list class="row items-center">
+                <q-item
+                  v-for="item in filteredItems"
+                  :key="item.id"
+                  class="col-xl-2 col-lg-2 col-md-3 col-sm-4 col-xs-12"
+                >
+                  <q-card class="item">
+                    <img :src="item.image" class="spirit item-img" />
+
+                    <q-card-section>
+                      <p class="text-center">{{ item.name }}</p>
+                    </q-card-section>
+                  </q-card>
+                </q-item>
+              </q-list>
+            </div>
           </q-tab-panel>
         </q-tab-panels>
       </q-card>
@@ -101,27 +131,27 @@ defineOptions({
   name: "IndexPage",
 });
 
-// variables
+// Variables
 const leftDrawerOpen = ref(false);
 const items = ref([]);
 const heros = ref([]);
+const tab = ref("build");
 
-// methods
-async function searchItems() {
-  let slotType = "weapon";
-  let url = "https://assets.deadlock-api.com/v2/items/by-slot-type/" + slotType;
+// Methods
+async function searchItems(slotType) {
+  let url = `https://assets.deadlock-api.com/v2/items/by-slot-type/${slotType}`;
   let config = {
     params: {
       slot_type: slotType,
       language: "english",
-      client_version: "5349",
+      client_version: "5368",
     },
   };
 
   try {
     const response = await axios.get(url, config);
     items.value = response.data;
-    console.log(items.value)
+    console.log(items.value);
   } catch (error) {
     console.error("Error fetching data from Deadlock API:", error);
   } finally {
@@ -141,7 +171,6 @@ async function searchHeros() {
 
   try {
     const response = await axios.get(url, config);
-    console.log(response.data);
     heros.value = response.data;
   } catch (error) {
     console.error("Error fetching data from Deadlock API:", error);
@@ -154,13 +183,26 @@ function toggleLeftDrawer() {
   leftDrawerOpen.value = !leftDrawerOpen.value;
 }
 
-// mounted
+// Handles tab changes
+function handleTabChange(newTab) {
+  const slotTypeMapping = {
+    build: "builder",
+    weapons: "weapon",
+    vitality: "vitality",
+    spirit: "spirit",
+  };
+
+  const slotType = slotTypeMapping[newTab] || "weapon";
+  searchItems(slotType);
+}
+
+// Mounted
 onMounted(() => {
-  searchItems();
+  searchItems("builder");
   searchHeros();
 });
 
-// Computed
+// Computed Properties
 const filteredHeros = computed(() => {
   return heros.value
     .filter((hero) => hero.in_development === false)
@@ -178,6 +220,4 @@ const filteredItems = computed(() => {
       return a.name.localeCompare(b.name);
     });
 });
-
-const tab = ref("build"); // Initialize the active tab to "build"
 </script>
