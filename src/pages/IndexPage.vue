@@ -1,37 +1,37 @@
 <template>
-      <q-header elevated>
-      <q-toolbar style="height: 100px">
-        <q-btn
-          flat
-          dense
-          round
-          icon="menu"
-          aria-label="Menu"
-          @click="toggleLeftDrawer"
-        />
+  <q-header elevated>
+    <q-toolbar style="height: 100px">
+      <q-btn
+        flat
+        dense
+        round
+        icon="menu"
+        aria-label="Menu"
+        @click="toggleLeftDrawer"
+      />
 
-        <q-toolbar-title> Deadlock Builder App </q-toolbar-title>
-      </q-toolbar>
-    </q-header>  
+      <q-toolbar-title> Deadlock Builder App </q-toolbar-title>
+    </q-toolbar>
+  </q-header>
   <q-drawer v-model="leftDrawerOpen" show-if-above bordered>
-      <q-list>
-        <q-item v-for="hero in filteredHeros" :key="hero.id">
-          <q-card class="my-card" flat bordered>
-            <q-card-section horizontal>
-              <q-img
-                class="col hero-icon-img"
-                :src= "hero.images.icon_hero_card"
-              />
-              <q-card-actions vertical class="justify-around q-px-md">
-                <div class="text-h6 text-center">{{hero.name}}</div>
-              </q-card-actions>
-            </q-card-section>
-          </q-card>
-        </q-item>
-      </q-list>
-    </q-drawer>
+    <q-list>
+      <q-item v-for="hero in filteredHeros" :key="hero.id">
+        <q-card class="my-card" flat bordered>
+          <q-card-section horizontal>
+            <q-img
+              class="col hero-icon-img"
+              :src="hero.images.icon_hero_card"
+            />
+            <q-card-actions vertical class="justify-around q-px-md">
+              <div class="text-h6 text-center">{{ hero.name }}</div>
+            </q-card-actions>
+          </q-card-section>
+        </q-card>
+      </q-item>
+    </q-list>
+  </q-drawer>
   <div class="q-pa-md">
-    <div class="q-gutter-y-md" style="max-width: 100%;">
+    <div class="q-gutter-y-md" style="max-width: 100%">
       <q-card>
         <q-tabs
           v-model="tab"
@@ -41,15 +41,14 @@
           indicator-color="primary"
           align="justify"
           narrow-indicator
-          
         >
-          <q-tab name="build" label="Build" class="q-pb-md q-pt-sm"/>
+          <q-tab name="build" label="Build" class="q-pb-md q-pt-sm" />
           <q-tab name="weapons" label="Weapons" />
           <q-tab name="vitality" label="Vitality" />
           <q-tab name="spirit" label="Spirit" />
         </q-tabs>
 
-        <q-tab-panels v-model="tab" animated style="height: 80vh;">
+        <q-tab-panels v-model="tab" animated style="height: 80vh">
           <q-tab-panel name="build">
             <div class="text-h6">Build</div>
             Lorem ipsum dolor sit amet consectetur adipisicing elit.
@@ -80,7 +79,7 @@ import { ref, computed, onMounted } from "vue";
 import axios from "axios";
 
 defineOptions({
-  name: 'IndexPage'
+  name: "IndexPage",
 });
 const leftDrawerOpen = ref(false);
 const items = ref([]);
@@ -147,5 +146,5 @@ const filteredItems = computed(() => {
   return heros.value.filter((item) => item.shopable === true);
 });
 
-const tab = ref('build')  // Initialize the active tab to "build"
+const tab = ref("build"); // Initialize the active tab to "build"
 </script>
