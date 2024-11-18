@@ -1,4 +1,5 @@
 <template>
+
   <q-header elevated>
     <q-toolbar style="height: 100px">
       <q-btn
@@ -9,10 +10,10 @@
         aria-label="Menu"
         @click="toggleLeftDrawer"
       />
-
       <q-toolbar-title> Deadlock Builder App </q-toolbar-title>
     </q-toolbar>
   </q-header>
+
   <q-drawer v-model="leftDrawerOpen" show-if-above bordered>
     <q-list>
       <q-item v-for="hero in filteredHeros" :key="hero.id">
@@ -30,6 +31,7 @@
       </q-item>
     </q-list>
   </q-drawer>
+
   <div class="q-pa-md">
     <div class="q-gutter-y-md" style="max-width: 100%">
       <q-card>
@@ -37,12 +39,12 @@
           v-model="tab"
           dense
           class="text-grey"
-          active-color="primary"
-          indicator-color="primary"
+          active-color="light"  
           align="justify"
           narrow-indicator
+          style="height: 50px;"
         >
-          <q-tab name="build" label="Build" class="q-pb-md q-pt-sm" />
+          <q-tab name="build" label="Build" />
           <q-tab name="weapons" label="Weapons" />
           <q-tab name="vitality" label="Vitality" />
           <q-tab name="spirit" label="Spirit" />
@@ -50,7 +52,7 @@
 
         <q-tab-panels v-model="tab" animated style="height: 80vh">
           <q-tab-panel name="build">
-            <div class="text-h6">Build</div>
+            <div class="text-h6">Builder</div>
             Lorem ipsum dolor sit amet consectetur adipisicing elit.
           </q-tab-panel>
 
@@ -72,6 +74,7 @@
       </q-card>
     </div>
   </div>
+  
 </template>
 
 <script setup>

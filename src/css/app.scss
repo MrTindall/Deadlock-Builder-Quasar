@@ -13,7 +13,7 @@ body {
 
 .q-card {
     width: 100%;
-    background-color: $dark;
+    background-color: $primary-dark;
 }
 
 .dark-banner {
@@ -28,10 +28,17 @@ body {
     background-color: $primary;
     color: $light;
 }
-.q-tab.q-tab--active {
-    background-color: $accent;
-}
 
 .q-tab-panel {
     background-color: $primary-dark;
+}
+
+.weapon{
+    background-color: $weapon;
+}
+.vitality {
+    background-color: $vitality;
+}
+.spirit {
+    background-color: $spirit;
 }
