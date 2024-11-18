@@ -74,7 +74,7 @@
       </q-card>
     </div>
   </div>
-  
+
 </template>
 
 <script setup>
@@ -84,10 +84,13 @@ import axios from "axios";
 defineOptions({
   name: "IndexPage",
 });
+
+// variables
 const leftDrawerOpen = ref(false);
 const items = ref([]);
 const heros = ref([]);
 
+// methods
 async function searchItems() {
   let slotType = "vitality";
   let url = "https://assets.deadlock-api.com/v2/items/by-slot-type/" + slotType;
@@ -134,15 +137,15 @@ function toggleLeftDrawer() {
   leftDrawerOpen.value = !leftDrawerOpen.value;
 }
 
-// Call the function when the component is mounted
+// mounted
 onMounted(() => {
   searchItems();
   searchHeros();
 });
 
-// Correctly define computed property
+// Computed
 const filteredHeros = computed(() => {
-  return heros.value.filter((hero) => hero.needs_testing === false);
+  return heros.value.filter((hero) => hero.in_development === false).sort((a, b) => a.name.localeCompare(b.name));
 });
 
 const filteredItems = computed(() => {
