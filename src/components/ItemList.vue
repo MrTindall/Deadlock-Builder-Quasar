@@ -4,6 +4,7 @@
       v-for="item in itemList" 
       :key="item.id" 
       class="col-xl-2 col-lg-2 col-md-3 col-sm-4 col-xs-12"
+      style="height: 270px;"
     >
       <ItemListItem :item="item" :itemClass="itemClass" />
     </q-item>

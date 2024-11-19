@@ -14,21 +14,7 @@
   </q-header>
 
   <q-drawer v-model="leftDrawerOpen" show-if-above bordered>
-    <q-list>
-      <q-item v-for="hero in filteredHeros" :key="hero.id">
-        <q-card class="hero" flat bordered>
-          <q-card-section horizontal>
-            <q-img
-              class="col hero-icon-img"
-              :src="hero.images.icon_hero_card"
-            />
-            <q-card-actions vertical class="justify-around q-px-md">
-              <div class="text-h6 text-center">{{ hero.name }}</div>
-            </q-card-actions>
-          </q-card-section>
-        </q-card>
-      </q-item>
-    </q-list>
+    <HeroList :heroList="filteredHeros"></HeroList>
   </q-drawer>
 
   <div class="q-pa-md">
@@ -76,6 +62,9 @@
 import { ref, computed, onMounted } from "vue";
 import axios from "axios";
 import PanelTab from "src/components/PanelTab.vue";
+import HeroList from "src/components/HeroList.vue";
+
+
 
 defineOptions({
   name: "IndexPage",
