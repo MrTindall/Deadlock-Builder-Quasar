@@ -7,22 +7,14 @@
     />
     <q-card-section>
       <p class="text-start">{{ item.name }}</p>
-      <div class="row" style="display: flex; justify-content: space-between; align-items: center;">
-        <div class="col text-start">
-          <p>Cost: {{ item.cost }}</p>
-        </div>
-        <div class="col text-end" style="display: flex; justify-content: flex-end;">
-          <q-btn
-            flat
-            :label="'&#8594;'"
-            @click="itemArrowClick"
-            class="text-h6"
-            style="padding: 0;"
-            round
-            
-          />
-        </div>
-      </div>
+      <p class="text-start">Cost: {{ item.cost }}</p>
+      <q-btn
+        flat
+        label="Details ›"
+        @click="itemArrowClick"
+        class="text-end"
+        style="width: 100%;"
+      />
     </q-card-section>
   </q-card>
 </template>

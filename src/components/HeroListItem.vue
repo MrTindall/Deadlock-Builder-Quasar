@@ -6,11 +6,10 @@
         <div class="text-h6 text-center">{{ hero.name }}</div>
         <q-btn
             flat
-            :label="'&#8594;'"
+            label="Details ›"
             @click="heroArrowClick"
             class="text-h6"
-            style="padding: 0;"
-            round
+            style="padding: 0; font-size: small;"
           />
       </q-card-actions>
     </q-card-section>
