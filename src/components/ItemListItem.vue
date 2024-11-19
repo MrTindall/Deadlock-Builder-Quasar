@@ -14,10 +14,12 @@
         <div class="col text-end" style="display: flex; justify-content: flex-end;">
           <q-btn
             flat
-            label="&#8594"
-            @click="handleArrowClick"
+            :label="'&#8594;'"
+            @click="itemArrowClick"
             class="text-h6"
             style="padding: 0;"
+            round
+            
           />
         </div>
       </div>
@@ -39,7 +41,7 @@ export default {
     },
   },
   methods: {
-    handleArrowClick() {
+    itemArrowClick() {
       // Placeholder, will eventually trigger Modal
       alert("Name: " + this.item.name + "\n\nCost: " + this.item.cost);
     },
