@@ -1,6 +1,6 @@
 <template>
   <q-card class="item">
-    <img :src="item.image" :class="[itemClass, 'item-img']" />
+    <img :src="item.image" :class="[itemClass, 'item-img']" style="height: 170px;"/>
     <q-card-section>
       <p class="text-center">{{ item.name }}</p>
     </q-card-section>
