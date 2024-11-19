@@ -53,3 +53,9 @@ body {
 .spirit {
     background-color: $spirit;
 }
+
+@media only screen and (max-width: 400px) {
+    .q-card.item {
+        width: 100%;
+    }
+}

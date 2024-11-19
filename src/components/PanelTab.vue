@@ -1,7 +1,7 @@
 <template>
   <div>
     <div class="text-h6">{{ name }}</div>
-    <div class="q-pa-sm">
+    <div>
       <ItemList :itemList="itemList" :itemClass="itemClass"/>
     </div>
   </div>

@@ -1,9 +1,9 @@
 <template>
-  <q-list class="row items-center">
+  <q-list class="row">
     <q-item 
       v-for="item in itemList" 
       :key="item.id" 
-      class="col-xl-2 col-lg-2 col-md-3 col-sm-4 col-xs-12"
+      class="col-xl-2 col-lg-2 col-md-3 col-sm-6 col-xs-12"
     >
       <ItemListItem :item="item" :itemClass="itemClass" />
     </q-item>
