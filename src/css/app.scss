@@ -1,7 +1,7 @@
 // app global css in SCSS form
 body {
     background-color: $dark-page;
-    font-size: large;
+    font-size:medium;
     font-weight: 600;
     font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
     color: $light;
@@ -18,7 +18,7 @@ body {
 
 .q-card.item {
     width: 200px;
-    height: 250px;
+    height: 300px;
     background-color: $dark;
 }
 
