@@ -24,9 +24,5 @@ export default {
 </script>
 
 <style scoped>
-.item-img {
-  width: 100%;
-  height: auto;
-  object-fit: cover;
-}
+
 </style>

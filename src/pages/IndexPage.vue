@@ -55,51 +55,16 @@
             <div class="text-h6">Builder</div>
           </q-tab-panel>
 
-          <!-- Need to figure out why panel tab isnt workin -->
           <q-tab-panel name="weapons">
-            <PanelTab :name="'Weapons'" :itemList="filteredItems" :itemClass="'weapon'" />
+            <PanelTab :name="'Weapons'" :itemList="filteredItems" :itemClass="'weapons'" />
           </q-tab-panel>
 
           <q-tab-panel name="vitality">
-            <div class="text-h6">Vitality</div>
-            <div class="q-pa-md">
-              <q-list class="row items-center">
-                <q-item
-                  v-for="item in filteredItems"
-                  :key="item.id"
-                  class="col-xl-2 col-lg-2 col-md-3 col-sm-4 col-xs-12"
-                >
-                  <q-card class="item">
-                    <img :src="item.image" class="vitality item-img" />
-
-                    <q-card-section>
-                      <p class="text-center">{{ item.name }}</p>
-                    </q-card-section>
-                  </q-card>
-                </q-item>
-              </q-list>
-            </div>
+            <PanelTab :name="'Vitality'" :itemList="filteredItems" :itemClass="'vitality'" />
           </q-tab-panel>
 
           <q-tab-panel name="spirit">
-            <div class="text-h6">Spirit</div>
-            <div class="q-pa-md">
-              <q-list class="row items-center">
-                <q-item
-                  v-for="item in filteredItems"
-                  :key="item.id"
-                  class="col-xl-2 col-lg-2 col-md-3 col-sm-4 col-xs-12"
-                >
-                  <q-card class="item">
-                    <img :src="item.image" class="spirit item-img" />
-
-                    <q-card-section>
-                      <p class="text-center">{{ item.name }}</p>
-                    </q-card-section>
-                  </q-card>
-                </q-item>
-              </q-list>
-            </div>
+            <PanelTab :name="'Spirit'" :itemList="filteredItems" :itemClass="'spirit'" />
           </q-tab-panel>
         </q-tab-panels>
       </q-card>
@@ -110,6 +75,7 @@
 <script setup>
 import { ref, computed, onMounted } from "vue";
 import axios from "axios";
+import PanelTab from "src/components/PanelTab.vue";
 
 defineOptions({
   name: "IndexPage",

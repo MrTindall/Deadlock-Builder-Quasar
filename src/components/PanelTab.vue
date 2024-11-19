@@ -2,13 +2,13 @@
   <div>
     <div class="text-h6">{{ name }}</div>
     <div class="q-pa-md">
-      <ItemList :itemList="itemList" :itemClass="itemClass" />
+      <ItemList :itemList="itemList" :itemClass="itemClass"/>
     </div>
   </div>
 </template>
 
 <script>
-import ItemList from "@/components/ItemList.vue";
+import ItemList from './ItemList.vue';
 
 export default {
   name: "PanelTab",

@@ -1,8 +1,8 @@
 <template>
   <q-list class="row items-center">
-    <q-item
-      v-for="item in itemList"
-      :key="item.id"
+    <q-item 
+      v-for="item in itemList" 
+      :key="item.id" 
       class="col-xl-2 col-lg-2 col-md-3 col-sm-4 col-xs-12"
     >
       <ItemListItem :item="item" :itemClass="itemClass" />
@@ -11,7 +11,7 @@
 </template>
 
 <script>
-import ItemListItem from "@/components/ItemListItem.vue";
+import ItemListItem from './ItemListItem.vue';
 
 export default {
   name: "ItemList",
