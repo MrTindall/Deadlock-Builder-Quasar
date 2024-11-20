@@ -35,10 +35,11 @@ body {
     color: $light;
 }
 
-.q-tab-panel {
+.q-tab-panels {
     background-color: $primary-dark;
     overflow-y: auto;
     overflow-x: hidden;
+    height: 80vh
 }
 
 .item-img {
@@ -52,4 +53,11 @@ body {
 }
 .spirit {
     background-color: $spirit;
+}
+
+
+@media (max-width: 600px) {
+    .q-tab-panels {
+        height: 75vh
+    }
 }

@@ -7,7 +7,14 @@
         <q-btn
             flat
             label="Details ›"
-            @click="heroArrowClick"
+            @click="heroDetailClick"
+            class="text-h6"
+            style="padding: 0; font-size: small;"
+          />
+          <q-btn
+            flat
+            label="Select ›"
+            @click="heroSelectClick"
             class="text-h6"
             style="padding: 0; font-size: small;"
           />
@@ -26,9 +33,14 @@ export default {
     }
   },
   methods: {
-    heroArrowClick() {
+    heroDetailClick() {
       // Placeholder, will eventually trigger Modal
       alert("Name: " + this.hero.name);
+    },
+
+    heroSelectClick() {
+      // Placeholder, will eventually trigger Modal
+      alert("You Selected: " + this.hero.name);
     },
   },
 };

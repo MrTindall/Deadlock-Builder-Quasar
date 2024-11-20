@@ -36,7 +36,7 @@
           <q-tab name="spirit" label="Spirit" />
         </q-tabs>
 
-        <q-tab-panels v-model="tab" animated style="height: 80vh">
+        <q-tab-panels v-model="tab" animated>
           <q-tab-panel name="build">
             <div class="text-h6">Builder</div>
           </q-tab-panel>
