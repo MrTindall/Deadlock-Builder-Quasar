@@ -55,6 +55,20 @@ body {
     background-color: $spirit;
 }
 
+.item, .hero {
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.item:hover {
+    transform: translateY(-8px);
+    box-shadow: 0 4px 15px rgba(0, 119, 255, 0.1);
+}
+
+.hero:hover {
+    transform: translateX(10px);
+    box-shadow: 0 4px 15px rgba(0, 119, 255, 0.1);
+}
+
 @media (max-width: 600px) {
     .q-tab-panels {
         height: 75vh
