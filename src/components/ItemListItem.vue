@@ -3,7 +3,7 @@
     <img
       :src="item.image"
       :class="[itemClass, 'item-img']"
-      style="height: 170px"
+       
     />
     <q-card-section>
       <p class="text-start">{{ item.name }}</p>

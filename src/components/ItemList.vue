@@ -3,7 +3,7 @@
     <q-item 
       v-for="item in itemList" 
       :key="item.id" 
-      class="col-xl-2 col-lg-2 col-md-3 col-sm-6 col-xs-12"
+      class="col-xl-2 col-lg-2 col-md-4 col-sm-4 col-xs-12 flex flex-center"
     >
       <ItemListItem :item="item" :itemClass="itemClass" />
     </q-item>
