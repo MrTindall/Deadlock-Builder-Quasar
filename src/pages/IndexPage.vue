@@ -64,8 +64,6 @@ import axios from "axios";
 import PanelTab from "src/components/PanelTab.vue";
 import HeroList from "src/components/HeroList.vue";
 
-
-
 defineOptions({
   name: "IndexPage",
 });
