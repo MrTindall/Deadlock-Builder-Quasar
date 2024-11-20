@@ -9,7 +9,7 @@
         aria-label="Menu"
         @click="toggleLeftDrawer"
       />
-      <q-toolbar-title> Deadlock Builder App </q-toolbar-title>
+      <q-toolbar-title> DeadSmith </q-toolbar-title>
     </q-toolbar>
   </q-header>
 
