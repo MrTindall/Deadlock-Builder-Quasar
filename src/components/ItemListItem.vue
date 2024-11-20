@@ -35,7 +35,7 @@ export default {
   methods: {
     itemArrowClick() {
       // Placeholder, will eventually trigger Modal
-      alert("Name: " + this.item.name + "\n\nCost: " + this.item.cost);
+      alert("Name: " + this.item.name + "\n\nCost: " + this.item.cost + "\n\nAbility Cooldown: " + this.item.properties.AbilityCooldown.value + " seconds");
     },
   },
 };
