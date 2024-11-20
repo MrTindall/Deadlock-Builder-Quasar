@@ -55,9 +55,36 @@ body {
     background-color: $spirit;
 }
 
-
 @media (max-width: 600px) {
     .q-tab-panels {
         height: 75vh
     }
+}
+
+// Scroll Bar Style
+.q-drawer {
+    scrollbar-width: thin;
+    /* Firefox: Makes the scrollbar thinner */
+    scrollbar-color: $primary $dark;
+    /* Firefox: Colors for thumb and track */
+}
+
+/* For WebKit browsers (e.g., Chrome, Edge, Safari) */
+.q-drawer::-webkit-scrollbar {
+    width: 8px;
+    /* Width of the scrollbar */
+}
+
+.q-drawer::-webkit-scrollbar-track {
+    background: $dark;
+    /* Background color of the track */
+}
+
+.q-drawer::-webkit-scrollbar-thumb {
+    background-color: $primary;
+    /* Color of the scrollbar thumb */
+    border-radius: 4px;
+    /* Rounded corners for the thumb */
+    border: 1px solid $dark;
+    /* Optional: Border for better contrast */
 }
