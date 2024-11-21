@@ -62,11 +62,13 @@ body {
 .item:hover {
     transform: translateY(-8px);
     box-shadow: 0 4px 15px rgba(0, 119, 255, 0.1);
+    cursor: pointer;
 }
 
 .hero:hover {
     transform: translateX(10px);
     box-shadow: 0 4px 15px rgba(0, 119, 255, 0.1);
+    cursor: pointer;
 }
 
 @media (max-width: 600px) {
