@@ -68,7 +68,6 @@ defineOptions({
 });
 
 // Variables
-let oneShot = false;
 const leftDrawerOpen = ref(false);
 const items = ref([]);
 const heros = ref([]);
