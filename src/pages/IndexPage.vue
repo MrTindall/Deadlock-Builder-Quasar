@@ -37,7 +37,7 @@
 
         <q-tab-panels v-model="tab" animated>
           <q-tab-panel name="build">
-            <PanelTab :name="'Builder'" :itemList="builderItems" />
+            <PanelTab :name="'Builder'" :itemList="builtItems" />
           </q-tab-panel>
 
           <q-tab-panel name="weapons">
@@ -71,6 +71,7 @@ defineOptions({
 const leftDrawerOpen = ref(false);
 const items = ref([]);
 const heros = ref([]);
+const builtItems = ref([]);
 const tab = ref("build");
 
 // async functions
@@ -88,7 +89,7 @@ async function searchItems(slotType) {
     const response = await axios.get(url, config);
     items.value = response.data;
     addIsActive(items.value);
-    console.log(items.value);
+    // console.log(items.value);
   } catch (error) {
     console.error("Error fetching data from Deadlock API:", error);
   } finally {
@@ -143,7 +144,11 @@ function handleTabChange(newTab) {
 function addToBuild(item) {
   const foundItem = items.value.find(i => i.id === item.id);
   if (foundItem) {
-    foundItem.isActive = true;
+    const existingItem = builtItems.value.find(i => i.id === foundItem.id) ?? null;
+    if(!existingItem) {
+      item.isActive = true;
+      builtItems.value.push(item)
+    }
   }
 }
 
@@ -154,6 +159,12 @@ onMounted(() => {
 });
 
 // Computed Properties
+const filteredHeros = computed(() => {
+  return heros.value
+    .filter((hero) => hero.in_development === false)
+    .sort((a, b) => a.name.localeCompare(b.name));
+});
+
 const builderItems = computed(() => {
   return items.value
     .filter((item) => item.isActive === true)
@@ -164,12 +175,6 @@ const builderItems = computed(() => {
       }
       return a.name.localeCompare(b.name);
     });
-});
-
-const filteredHeros = computed(() => {
-  return heros.value
-    .filter((hero) => hero.in_development === false)
-    .sort((a, b) => a.name.localeCompare(b.name));
 });
 
 const filteredItems = computed(() => {
