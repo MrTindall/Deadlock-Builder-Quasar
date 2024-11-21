@@ -41,15 +41,15 @@
           </q-tab-panel>
 
           <q-tab-panel name="weapons">
-            <PanelTab :name="'Weapons'" :itemList="filteredItems" :itemClass="'weapons'" @itemIsActive="addToBuild"/>
+            <PanelTab :name="'Weapons'" :itemList="filteredItems" @itemIsActive="addToBuild"/>
           </q-tab-panel>
 
           <q-tab-panel name="vitality">
-            <PanelTab :name="'Vitality'" :itemList="filteredItems" :itemClass="'vitality'" @itemIsActive="addToBuild"/>
+            <PanelTab :name="'Vitality'" :itemList="filteredItems" @itemIsActive="addToBuild"/>
           </q-tab-panel>
 
           <q-tab-panel name="spirit">
-            <PanelTab :name="'Spirit'" :itemList="filteredItems" :itemClass="'spirit'" @itemIsActive="addToBuild"/>
+            <PanelTab :name="'Spirit'" :itemList="filteredItems" @itemIsActive="addToBuild"/>
           </q-tab-panel>
         </q-tab-panels>
       </q-card>
@@ -68,6 +68,7 @@ defineOptions({
 });
 
 // Variables
+let oneShot = false;
 const leftDrawerOpen = ref(false);
 const items = ref([]);
 const heros = ref([]);

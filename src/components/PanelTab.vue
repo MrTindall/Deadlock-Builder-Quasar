@@ -2,7 +2,7 @@
   <div>
     <div class="text-h6">{{ name }}</div>
     <div>
-      <ItemList :itemList="itemList" :itemClass="itemClass" @itemIsActive="addToBuild"/>
+      <ItemList :itemList="itemList" @itemIsActive="addToBuild"/>
     </div>
   </div>
 </template>
@@ -19,10 +19,6 @@ export default {
     name: {
       type: String,
       required: true,
-    },
-    itemClass: {
-      type: String,
-      default: "",
     },
     itemList: {
       type: Array,

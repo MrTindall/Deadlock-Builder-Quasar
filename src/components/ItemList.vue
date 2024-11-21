@@ -5,7 +5,7 @@
       :key="item.id" 
       class="col-xl-2 col-lg-2 col-md-4 col-sm-4 col-xs-12 flex flex-center"
     >
-      <ItemListItem :item="item" :itemClass="itemClass" @itemIsActive="addToBuild"/>
+      <ItemListItem :item="item" @itemIsActive="addToBuild"/>
     </q-item>
   </q-list>
 </template>
@@ -22,10 +22,6 @@ export default {
     itemList: {
       type: Array,
       required: true,
-    },
-    itemClass: {
-      type: String,
-      default: "",
     },
   },
 
