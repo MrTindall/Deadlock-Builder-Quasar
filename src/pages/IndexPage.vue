@@ -27,7 +27,6 @@
           active-color="light"
           align="justify"
           narrow-indicator
-          style="height: 50px"
           @update:model-value="handleTabChange"
         >
           <q-tab name="build" label="Build" />
@@ -38,19 +37,19 @@
 
         <q-tab-panels v-model="tab" animated>
           <q-tab-panel name="build">
-            <div class="text-h6">Builder</div>
+            <PanelTab :name="'Builder'" :itemList="builderItems" />
           </q-tab-panel>
 
           <q-tab-panel name="weapons">
-            <PanelTab :name="'Weapons'" :itemList="filteredItems" :itemClass="'weapons'" />
+            <PanelTab :name="'Weapons'" :itemList="filteredItems" :itemClass="'weapons'" @itemIsActive="addToBuild"/>
           </q-tab-panel>
 
           <q-tab-panel name="vitality">
-            <PanelTab :name="'Vitality'" :itemList="filteredItems" :itemClass="'vitality'" />
+            <PanelTab :name="'Vitality'" :itemList="filteredItems" :itemClass="'vitality'" @itemIsActive="addToBuild"/>
           </q-tab-panel>
 
           <q-tab-panel name="spirit">
-            <PanelTab :name="'Spirit'" :itemList="filteredItems" :itemClass="'spirit'" />
+            <PanelTab :name="'Spirit'" :itemList="filteredItems" :itemClass="'spirit'" @itemIsActive="addToBuild"/>
           </q-tab-panel>
         </q-tab-panels>
       </q-card>
@@ -74,7 +73,7 @@ const items = ref([]);
 const heros = ref([]);
 const tab = ref("build");
 
-// Methods
+// async functions
 async function searchItems(slotType) {
   let url = `https://assets.deadlock-api.com/v2/items/by-slot-type/${slotType}`;
   let config = {
@@ -88,6 +87,7 @@ async function searchItems(slotType) {
   try {
     const response = await axios.get(url, config);
     items.value = response.data;
+    addIsActive(items.value);
     console.log(items.value);
   } catch (error) {
     console.error("Error fetching data from Deadlock API:", error);
@@ -109,6 +109,7 @@ async function searchHeros() {
   try {
     const response = await axios.get(url, config);
     heros.value = response.data;
+    addIsActive(heros.value);
   } catch (error) {
     console.error("Error fetching data from Deadlock API:", error);
   } finally {
@@ -116,11 +117,17 @@ async function searchHeros() {
   }
 }
 
+// functions
+function addIsActive(arr) {
+  arr.forEach(element => {
+    element.isActive = false;
+  });
+}
+
 function toggleLeftDrawer() {
   leftDrawerOpen.value = !leftDrawerOpen.value;
 }
 
-// Handles tab changes
 function handleTabChange(newTab) {
   const slotTypeMapping = {
     build: "builder",
@@ -133,6 +140,13 @@ function handleTabChange(newTab) {
   searchItems(slotType);
 }
 
+function addToBuild(item) {
+  const foundItem = items.value.find(i => i.id === item.id);
+  if (foundItem) {
+    foundItem.isActive = true;
+  }
+}
+
 // Mounted
 onMounted(() => {
   searchItems("builder");
@@ -140,6 +154,18 @@ onMounted(() => {
 });
 
 // Computed Properties
+const builderItems = computed(() => {
+  return items.value
+    .filter((item) => item.isActive === true)
+    .sort((a, b) => {
+      const costDifference = a.cost - b.cost;
+      if (costDifference !== 0) {
+        return costDifference;
+      }
+      return a.name.localeCompare(b.name);
+    });
+});
+
 const filteredHeros = computed(() => {
   return heros.value
     .filter((hero) => hero.in_development === false)
@@ -158,3 +184,9 @@ const filteredItems = computed(() => {
     });
 });
 </script>
+
+<style lang="scss">
+.q-tabs {
+  height: 50px;
+}
+</style>

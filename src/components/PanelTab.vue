@@ -2,7 +2,7 @@
   <div>
     <div class="text-h6">{{ name }}</div>
     <div>
-      <ItemList :itemList="itemList" :itemClass="itemClass"/>
+      <ItemList :itemList="itemList" :itemClass="itemClass" @itemIsActive="addToBuild"/>
     </div>
   </div>
 </template>
@@ -29,5 +29,10 @@ export default {
       required: true,
     },
   },
+  methods: {
+    addToBuild(item) {
+     this.$emit("itemIsActive", item);
+    },
+  }
 };
 </script>

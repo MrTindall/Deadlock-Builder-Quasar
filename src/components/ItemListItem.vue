@@ -52,8 +52,7 @@ export default {
       );
     },
     addToBuild() {
-      // Placeholder, will eventually add to build
-      alert("Added to build: " + this.item.name);
+     this.$emit("itemIsActive", this.item);
     },
   },
 };
