@@ -78,7 +78,7 @@ body {
 }
 
 // Scroll Bar Style
-.q-drawer {
+.q-drawer, .scroll {
     scrollbar-width: thin;
     /* Firefox: Makes the scrollbar thinner */
     scrollbar-color: $primary $dark;
@@ -86,17 +86,20 @@ body {
 }
 
 /* For WebKit browsers (e.g., Chrome, Edge, Safari) */
-.q-drawer::-webkit-scrollbar {
+.q-drawer::-webkit-scrollbar,
+.scroll::-webkit-scrollbar {
     width: 8px;
     /* Width of the scrollbar */
 }
 
-.q-drawer::-webkit-scrollbar-track {
+.q-drawer::-webkit-scrollbar-track,
+.scroll::-webkit-scrollbar-track {
     background: $dark;
     /* Background color of the track */
 }
 
-.q-drawer::-webkit-scrollbar-thumb {
+.q-drawer::-webkit-scrollbar-thumb,
+.scroll::-webkit-scrollbar-thumb {
     background-color: $primary;
     /* Color of the scrollbar thumb */
     border-radius: 4px;
