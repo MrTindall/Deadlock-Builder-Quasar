@@ -9,6 +9,10 @@
       <q-card-section horizontal>
         <q-img class="col hero-icon-img" :src="hero.images.icon_hero_card" />
         <q-card-actions vertical>
+          <div class="q-pb-lg flex justify-end">
+            <q-icon v-if="hero.complexity === 1" name="thumb_up" />
+            <q-icon v-else/>
+          </div>
           <div class="text-h6 text-center">{{ hero.name }}</div>
           <q-btn
             flat
@@ -17,6 +21,7 @@
             class="text-h6"
             style="padding: 0; font-size: small;"
           />
+          
         </q-card-actions>
       </q-card-section>
     </q-card>
@@ -45,8 +50,12 @@ export default {
 };
 </script>
 
-<style lang="scss">
+<style scoped lang="scss">
 .selectable-card-btn {
   padding: 0;
+}
+
+.q-icon {
+  color: $primary;
 }
 </style>

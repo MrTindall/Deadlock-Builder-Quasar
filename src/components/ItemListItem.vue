@@ -40,8 +40,7 @@
             icon="delete"
             flat
             unelevated
-            class="flex flex-start"
-            style="width: fit-content; padding: 0; margin: 0"
+            class="flex flex-start trash"
             @click="deleteItem"
           />
         </div>
@@ -79,9 +78,13 @@ export default {
 };
 </script>
 
-<style lang="scss">
+<style scoped lang="scss">
 .selectable-card-btn {
   padding: 0;
   background: none;
+}
+.q-btn.trash {
+  color: rgb(107, 0, 0);
+  width: 20px;
 }
 </style>
