@@ -11,12 +11,12 @@
         <p class="flex flex-start">{{ item.name }}</p>
         <p class="flex flex-start">Cost: {{ item.cost }}</p>
         <q-btn
-          flat
-          label="Details ›"
-          @click.stop="itemArrowClick"
-          class="flex flex-start"
-          style="width: fit-content; padding: 0; margin: 0"
-        />
+            flat
+            label="Details"
+            @click.stop="itemDetails"
+            class="flex flex-start"
+            style="width: fit-content; padding: 0; margin: 0"
+          />
       </q-card-section>
     </q-card>
 
@@ -32,7 +32,7 @@
           <q-btn
             flat
             label="Details"
-            @click.stop="itemArrowClick"
+            @click.stop="itemDetails"
             class="flex flex-start"
             style="width: fit-content; padding: 0; margin: 0"
           />
@@ -60,7 +60,7 @@ export default {
     },
   },
   methods: {
-    itemArrowClick() {
+    itemDetails() {
       // Placeholder, will eventually trigger Modal
       alert(
         "Name: " +
