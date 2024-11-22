@@ -2,7 +2,7 @@
   <div>
     <div class="text-h6">{{ name }}</div>
     <div>
-      <ItemList :itemList="itemList" @itemIsActive="addToBuild"/>
+      <ItemList :itemList="itemList" @itemIsActive="addToBuild" @deleteItem="deleteItem"/>
     </div>
   </div>
 </template>
@@ -28,6 +28,9 @@ export default {
   methods: {
     addToBuild(item) {
      this.$emit("itemIsActive", item);
+    },
+    deleteItem(item) {
+      this.$emit("deleteItem", item)
     },
   }
 };

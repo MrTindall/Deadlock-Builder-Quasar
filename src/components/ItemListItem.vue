@@ -41,7 +41,7 @@
             flat
             unelevated
             class="flex flex-start trash"
-            @click="deleteItem"
+            @click.stop="deleteItem"
           />
         </div>
       </q-card-section>
@@ -74,6 +74,9 @@ export default {
     addToBuild() {
       this.$emit("itemIsActive", this.item);
     },
+    deleteItem() {
+      this.$emit("deleteItem", this.item)
+    }
   },
 };
 </script>

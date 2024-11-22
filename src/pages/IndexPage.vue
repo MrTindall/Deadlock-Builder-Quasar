@@ -37,19 +37,19 @@
 
         <q-tab-panels v-model="tab" animated>
           <q-tab-panel name="build">
-            <PanelTab :name="'Builder'" :itemList="builtItems" />
+            <PanelTab :name="'Builder'" :itemList="builtItems"  @deleteItem="deleteItem"/>
           </q-tab-panel>
 
           <q-tab-panel name="weapons">
-            <PanelTab :name="'Weapons'" :itemList="filteredItems" @itemIsActive="addToBuild"/>
+            <PanelTab :name="'Weapons'" :itemList="filteredItems" @itemIsActive="addToBuild" @deleteItem="deleteItem"/>
           </q-tab-panel>
 
           <q-tab-panel name="vitality">
-            <PanelTab :name="'Vitality'" :itemList="filteredItems" @itemIsActive="addToBuild"/>
+            <PanelTab :name="'Vitality'" :itemList="filteredItems" @itemIsActive="addToBuild" @deleteItem="deleteItem"/>
           </q-tab-panel>
 
           <q-tab-panel name="spirit">
-            <PanelTab :name="'Spirit'" :itemList="filteredItems" @itemIsActive="addToBuild"/>
+            <PanelTab :name="'Spirit'" :itemList="filteredItems" @itemIsActive="addToBuild" @deleteItem="deleteItem"/>
           </q-tab-panel>
         </q-tab-panels>
       </q-card>
@@ -148,6 +148,20 @@ function addToBuild(item) {
     if(!existingItem) {
       item.isActive = true;
       builtItems.value.push(item)
+    }
+  }
+}
+
+function deleteItem(item) {
+  const index = builtItems.value.findIndex(i => i.id === item.id);
+  if (index !== -1) {
+    builtItems.value.splice(index, 1);
+  }
+  const foundItem = items.value.find(i => i.id === item.id);
+  if (foundItem) {
+    const existingItem = builtItems.value.find(i => i.id === foundItem.id) ?? null;
+    if(!existingItem) {
+      item.isActive = false;
     }
   }
 }
