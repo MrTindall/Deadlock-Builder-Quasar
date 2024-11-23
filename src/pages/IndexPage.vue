@@ -183,13 +183,10 @@ function deleteItem(item) {
   if (index !== -1) {
     builtItems.value.splice(index, 1);
   }
-  const foundItem = items.value.find((i) => i.id === item.id);
+
+  const foundItem = allItems.value.find((i) => i.id === item.id);
   if (foundItem) {
-    const existingItem =
-      builtItems.value.find((i) => i.id === foundItem.id) ?? null;
-    if (!existingItem) {
-      item.isActive = false;
-    }
+    foundItem.isActive = false;
   }
 }
 
