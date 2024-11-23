@@ -17,10 +17,11 @@
           <q-btn
             flat
             label="Details"
-            @click.stop="itemDetails"
+            @click.stop="itemDetails = !itemDetails"
             class="flex flex-start"
             style="width: fit-content; padding: 0; margin: 0"
           />
+          <DetailsModal v-model="itemDetails" :item="item"/>
           <q-btn
             v-if="item.isActive"
             icon="delete"
@@ -36,8 +37,13 @@
 </template>
 
 <script>
+import DetailsModal from './DetailsModal.vue';
+
 export default {
   name: "ItemListItem",
+  components: {
+    DetailsModal,
+  },
   props: {
     item: {
       type: Object,
@@ -47,19 +53,15 @@ export default {
       type: String,
     },
   },
+  data() {
+    return {
+      itemDetails: false,
+    }
+  },
   methods: {
-    itemDetails() {
-      // Placeholder, will eventually trigger Modal
-      alert(
-        "Name: " +
-          this.item.name +
-          "\n\nCost: " +
-          this.item.cost +
-          "\n\nAbility Cooldown: " +
-          this.item.properties.AbilityCooldown.value +
-          " seconds"
-      );
-    },
+    // itemDetails() {
+
+    // },
     addToBuild() {
       this.$emit("itemIsActive", this.item);
     },
