@@ -5,29 +5,14 @@
     class="selectable-card-btn full-width"
     @click="addToBuild"
   >
-    <q-card v-if="!item.isActive" class="item">
-      <img :src="item.image" :class="['item-img', item.item_slot_type]" />
-      <q-card-section>
-        <p class="flex flex-start">{{ item.name }}</p>
-        <p class="flex flex-start">Cost: {{ item.cost }}</p>
-        <q-btn
-            flat
-            label="Details"
-            @click.stop="itemDetails"
-            class="flex flex-start"
-            style="width: fit-content; padding: 0; margin: 0"
-          />
-      </q-card-section>
-    </q-card>
-
-    <q-card v-else class="item">
+    <q-card class="item">
       <img :src="item.image" :class="['item-img', item.item_slot_type]" />
       <q-card-section>
         <p class="flex flex-start">{{ item.name }}</p>
         <p class="flex flex-start">Cost: {{ item.cost }}</p>
         <div
           class="button-row"
-          style="display: flex; justify-content: space-between;"
+          style="display: flex; justify-content: space-between"
         >
           <q-btn
             flat
@@ -37,6 +22,7 @@
             style="width: fit-content; padding: 0; margin: 0"
           />
           <q-btn
+            v-if="item.isActive"
             icon="delete"
             flat
             unelevated
@@ -57,6 +43,9 @@ export default {
       type: Object,
       required: true,
     },
+    itemType: {
+      type: String,
+    },
   },
   methods: {
     itemDetails() {
@@ -75,8 +64,8 @@ export default {
       this.$emit("itemIsActive", this.item);
     },
     deleteItem() {
-      this.$emit("deleteItem", this.item)
-    }
+      this.$emit("deleteItem", this.item);
+    },
   },
 };
 </script>
@@ -86,6 +75,7 @@ export default {
   padding: 0;
   background: none;
 }
+
 .q-btn.trash {
   color: rgb(107, 0, 0);
   width: 20px;

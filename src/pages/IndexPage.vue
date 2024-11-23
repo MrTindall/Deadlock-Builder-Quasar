@@ -37,19 +37,38 @@
 
         <q-tab-panels v-model="tab" animated>
           <q-tab-panel name="build">
-            <PanelTab :name="'Builder'" :itemList="builtItems"  @deleteItem="deleteItem"/>
+            <PanelTab
+              :name="'Builder'"
+              :itemList="builtItems"
+              @deleteItem="deleteItem"
+            />
           </q-tab-panel>
 
           <q-tab-panel name="weapons">
-            <PanelTab :name="'Weapons'" :itemList="filteredItems" @itemIsActive="addToBuild" @deleteItem="deleteItem"/>
+            <PanelTab
+              :name="'Weapons'"
+              :itemList="weaponItems"
+              @itemIsActive="addToBuild"
+              @deleteItem="deleteItem"
+            />
           </q-tab-panel>
 
           <q-tab-panel name="vitality">
-            <PanelTab :name="'Vitality'" :itemList="filteredItems" @itemIsActive="addToBuild" @deleteItem="deleteItem"/>
+            <PanelTab
+              :name="'Vitality'"
+              :itemList="vitalityItems"
+              @itemIsActive="addToBuild"
+              @deleteItem="deleteItem"
+            />
           </q-tab-panel>
 
           <q-tab-panel name="spirit">
-            <PanelTab :name="'Spirit'" :itemList="filteredItems" @itemIsActive="addToBuild" @deleteItem="deleteItem"/>
+            <PanelTab
+              :name="'Spirit'"
+              :itemList="spiritItems"
+              @itemIsActive="addToBuild"
+              @deleteItem="deleteItem"
+            />
           </q-tab-panel>
         </q-tab-panels>
       </q-card>
@@ -73,13 +92,13 @@ const items = ref([]);
 const heros = ref([]);
 const builtItems = ref([]);
 const tab = ref("build");
+const allItems = ref([]);
 
 // async functions
-async function searchItems(slotType) {
-  let url = `https://assets.deadlock-api.com/v2/items/by-slot-type/${slotType}`;
+async function getAllItems() {
+  let url = `https://assets.deadlock-api.com/v2/items`;
   let config = {
     params: {
-      slot_type: slotType,
       language: "english",
       client_version: "5368",
     },
@@ -87,8 +106,8 @@ async function searchItems(slotType) {
 
   try {
     const response = await axios.get(url, config);
-    items.value = response.data;
-    addIsActive(items.value);
+    allItems.value = response.data;
+    addIsActive(allItems.value);
     // console.log(items.value);
   } catch (error) {
     console.error("Error fetching data from Deadlock API:", error);
@@ -120,7 +139,7 @@ async function searchHeros() {
 
 // functions
 function addIsActive(arr) {
-  arr.forEach(element => {
+  arr.forEach((element) => {
     element.isActive = false;
   });
 }
@@ -137,30 +156,38 @@ function handleTabChange(newTab) {
     spirit: "spirit",
   };
 
-  const slotType = slotTypeMapping[newTab] || "weapon";
-  searchItems(slotType);
+  const slotType = slotTypeMapping[newTab];
+  if (slotType) {
+    items.value = allItems.value.filter(
+      (item) => item.item_slot_type === slotType && item.shopable === true
+    );
+  } else {
+    items.value = [];
+  }
 }
 
 function addToBuild(item) {
-  const foundItem = items.value.find(i => i.id === item.id);
+  const foundItem = items.value.find((i) => i.id === item.id);
   if (foundItem) {
-    const existingItem = builtItems.value.find(i => i.id === foundItem.id) ?? null;
-    if(!existingItem) {
+    const existingItem =
+      builtItems.value.find((i) => i.id === foundItem.id) ?? null;
+    if (!existingItem) {
       item.isActive = true;
-      builtItems.value.push(item)
+      builtItems.value.push(item);
     }
   }
 }
 
 function deleteItem(item) {
-  const index = builtItems.value.findIndex(i => i.id === item.id);
+  const index = builtItems.value.findIndex((i) => i.id === item.id);
   if (index !== -1) {
     builtItems.value.splice(index, 1);
   }
-  const foundItem = items.value.find(i => i.id === item.id);
+  const foundItem = items.value.find((i) => i.id === item.id);
   if (foundItem) {
-    const existingItem = builtItems.value.find(i => i.id === foundItem.id) ?? null;
-    if(!existingItem) {
+    const existingItem =
+      builtItems.value.find((i) => i.id === foundItem.id) ?? null;
+    if (!existingItem) {
       item.isActive = false;
     }
   }
@@ -168,8 +195,8 @@ function deleteItem(item) {
 
 // Mounted
 onMounted(() => {
-  searchItems("builder");
   searchHeros();
+  getAllItems();
 });
 
 // Computed Properties
@@ -179,33 +206,28 @@ const filteredHeros = computed(() => {
     .sort((a, b) => a.name.localeCompare(b.name));
 });
 
-const builderItems = computed(() => {
-  return items.value
-    .filter((item) => item.isActive === true)
-    .sort((a, b) => {
-      const costDifference = a.cost - b.cost;
-      if (costDifference !== 0) {
-        return costDifference;
-      }
-      return a.name.localeCompare(b.name);
-    });
-});
+function filterAndSortItems(slotType) {
+  return computed(() => {
+    return allItems.value
+      .filter(
+        (item) => item.item_slot_type === slotType && item.shopable === true
+      )
+      .sort((a, b) => {
+        const costDifference = a.cost - b.cost;
+        return costDifference !== 0
+          ? costDifference
+          : a.name.localeCompare(b.name);
+      });
+  });
+}
 
-const filteredItems = computed(() => {
-  return items.value
-    .filter((item) => item.shopable === true)
-    .sort((a, b) => {
-      const costDifference = a.cost - b.cost;
-      if (costDifference !== 0) {
-        return costDifference;
-      }
-      return a.name.localeCompare(b.name);
-    });
-});
+const weaponItems = filterAndSortItems("weapon");
+const vitalityItems = filterAndSortItems("vitality");
+const spiritItems = filterAndSortItems("spirit");
 </script>
 
 <style lang="scss">
-.q-tabs {
-  height: 50px;
-}
+  .q-tabs {
+    height: 50px;
+  }
 </style>
