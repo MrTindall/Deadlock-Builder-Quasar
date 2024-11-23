@@ -1,7 +1,7 @@
 <template>
     <q-dialog backdrop-filter="blur(4px) desaturate(-150%)" ref="modal">
     <q-card>
-        <q-card-section class="row items-center text-h6 background-color">
+        <q-card-section :class="['row items-center', 'text-h6',  item.item_slot_type]">
           {{ item.name }}
         </q-card-section>
 
@@ -39,8 +39,5 @@ export default {
     max-width: 90vw;
     height: 600px;
     max-height: 90vh;
-}
-.background-color {
-    background-color: $primary;
 }
 </style>
