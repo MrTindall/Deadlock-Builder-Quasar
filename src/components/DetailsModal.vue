@@ -5,7 +5,7 @@
           {{ item.name }}
         </q-card-section>
 
-        <q-card-actions class="flex justify-between">
+        <q-card-actions class="flex justify-end">
           <div>
             <q-btn flat label="Cancel" size="md" class="q-ma-sm" color="secondary" v-close-popup/>
           </div>
@@ -28,9 +28,7 @@ export default {
     },
   },
   methods: {
-    onOpen() {
-      
-    },
+
   }
 };
 </script>
