@@ -5,7 +5,13 @@
       :key="item.id" 
       class="col-xl-2 col-lg-2 col-md-4 col-sm-4 col-xs-12 flex flex-center"
     >
-      <ItemListItem :item="item" @itemIsActive="addToBuild" @deleteItem="deleteItem"/>
+      <!-- Pass itemList down as a prop to ItemListItem -->
+      <ItemListItem 
+        :item="item" 
+        :itemList="itemList"
+        @itemIsActive="addToBuild" 
+        @deleteItem="deleteItem" 
+      />
     </q-item>
   </q-list>
 </template>
@@ -24,13 +30,12 @@ export default {
       required: true,
     },
   },
-
   methods: {
     addToBuild(item) {
-     this.$emit("itemIsActive", item);
+      this.$emit("itemIsActive", item);
     },
     deleteItem(item) {
-      this.$emit("deleteItem", item)
+      this.$emit("deleteItem", item);
     }
   }
 };

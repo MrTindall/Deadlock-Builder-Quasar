@@ -1,13 +1,13 @@
 <template>
-  <q-dialog backdrop-filter="blur(4px) desaturate(-150%)" ref="modal" >
+  <q-dialog backdrop-filter="blur(4px) desaturate(-150%)" ref="modal">
     <q-card :class="[item.item_slot_type + '-dark']">
       <q-card-section :class="['row items-center', 'text-h6', item.item_slot_type]">
-          {{ item.name }}
-          <br>
-          ${{ item.cost }}
+        {{ item.name }}
+        <br />
+        ${{ item.cost }}
       </q-card-section>
-      <q-card-section v-if="item.component_items" :class="['row items-center', 'text-h6']">
-        Component of: {{ item.component_items[0] }}
+      <q-card-section v-if="item.component_items && item.component_items.length" :class="['row items-center', 'text-h6']">
+        Component of: {{ getComponentName(item, itemList) }}
       </q-card-section>
       <q-card-section :class="['row items-center', 'text-h6', [item.item_slot_type + '-darker']]">
         Activation: {{ item.activation }}
@@ -21,16 +21,32 @@
     </q-card>
   </q-dialog>
 </template>
+
 <script>
 export default {
   name: "DetailsModal",
-  data() {
-    return {};
-  },
   props: {
     item: {
       type: Object,
       required: true,
+    },
+    itemList: {
+      type: Array,
+      required: true,
+    },
+  },
+  methods: {
+    getComponentName(item, arr) {
+      if (item.component_items && item.component_items.length > 0) {
+        const componentName = item.component_items[0];
+        console.log(componentName)
+        const foundItem = arr.find((element) => 
+          element.class_name === componentName
+        );
+        
+        return foundItem ? foundItem.name : "Unknown Component";
+      }
+      return "No component";
     },
   },
 };

@@ -21,7 +21,12 @@
             class="flex flex-start"
             style="width: fit-content; padding: 0; margin: 0"
           />
-          <DetailsModal v-model="itemDetails" :item="item"/>
+          <!-- Pass itemList to the modal here -->
+          <DetailsModal 
+            v-model="itemDetails" 
+            :item="item"
+            :itemList="itemList"
+          />
           <q-btn
             v-if="item.isActive"
             icon="delete"
@@ -49,19 +54,17 @@ export default {
       type: Object,
       required: true,
     },
-    itemType: {
-      type: String,
+    itemList: {
+      type: Array,  // Accept itemList as a prop
+      required: true,
     },
   },
   data() {
     return {
       itemDetails: false,
-    }
+    };
   },
   methods: {
-    // itemDetails() {
-
-    // },
     addToBuild() {
       this.$emit("itemIsActive", this.item);
     },
@@ -71,6 +74,7 @@ export default {
   },
 };
 </script>
+
 
 <style scoped lang="scss">
 .selectable-card-btn {
