@@ -6,6 +6,9 @@
           <br>
           ${{ item.cost }}
       </q-card-section>
+      <q-card-section v-if="item.component_items" :class="['row items-center', 'text-h6']">
+        Component of: {{ item.component_items[0] }}
+      </q-card-section>
       <q-card-section :class="['row items-center', 'text-h6', [item.item_slot_type + '-darker']]">
         Activation: {{ item.activation }}
       </q-card-section>
@@ -30,7 +33,6 @@ export default {
       required: true,
     },
   },
-  methods: {},
 };
 </script>
 <style scoped lang="scss">
