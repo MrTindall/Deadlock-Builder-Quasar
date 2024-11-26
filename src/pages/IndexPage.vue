@@ -108,7 +108,7 @@ async function getAllItems() {
     const response = await axios.get(url, config);
     allItems.value = response.data;
     addIsActive(allItems.value);
-    // console.log(items.value);
+    console.log(allItems.value);
   } catch (error) {
     console.error("Error fetching data from Deadlock API:", error);
   } finally {
@@ -130,7 +130,7 @@ async function searchHeros() {
     const response = await axios.get(url, config);
     heros.value = response.data;
     addIsActive(heros.value);
-    console.log(heros.value)
+    // console.log(heros.value)
   } catch (error) {
     console.error("Error fetching data from Deadlock API:", error);
   } finally {

@@ -55,6 +55,30 @@ body {
     background-color: $spirit;
 }
 
+.weapon-dark {
+    background-color: $weapon-dark;
+}
+
+.vitality-dark {
+    background-color: $vitality-dark;
+}
+
+.spirit-dark {
+    background-color: $spirit-dark;
+}
+
+.weapon-darker {
+    background-color: $weapon-darker;
+}
+
+.vitality-darker {
+    background-color: $vitality-darker;
+}
+
+.spirit-darker {
+    background-color: $spirit-darker;
+}
+
 .item, .hero {
     transition: transform 0.3s ease, box-shadow 0.3s ease;
 }
