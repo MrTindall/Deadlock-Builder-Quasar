@@ -19,12 +19,7 @@
       </q-card-section>
 
       <div class="q-pa-md">
-        <div v-for="(property, key) in item.properties" :key="key" class="property">
-          <!-- Exclude 'AbilityUnitTargetLimit' -->
-          <div v-if="property.value > 0 && key !== 'AbilityUnitTargetLimit'" class="property-row">
-            {{ formatKey(key) }}: {{ formatValue(property) }}
-          </div>
-        </div>
+        
       </div>
 
       <q-card-actions class="flex justify-end">
@@ -62,25 +57,6 @@ export default {
       }
       return "No component";
     },
-    formatKey(key) {
-      // Format the property key to display it nicely (e.g., camelCase -> "Camel Case")
-      return key.replace(/([A-Z])/g, ' $1').replace(/^./, str => str.toUpperCase());
-    },
-    formatValue(property) {
-      // Handle formatting for different property values
-      if (property.display_units) {
-        return `${property.value} ${this.getDisplayUnit(property.display_units)}`;
-      }
-      return property.value;
-    },
-    getDisplayUnit(unit) {
-      const unitMap = {
-        "EDisplayUnit_Meters": "m",
-        "EDisplayUnit_MetersPerSecond": "m/s",
-        "EDisplayUnit_Normal": "",
-      };
-      return unitMap[unit] || '';
-    }
   },
 };
 </script>
