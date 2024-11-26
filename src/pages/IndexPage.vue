@@ -195,6 +195,7 @@ function deleteItem(item) {
 onMounted(() => {
   searchHeros();
   getAllItems();
+
 });
 
 // Computed Properties
