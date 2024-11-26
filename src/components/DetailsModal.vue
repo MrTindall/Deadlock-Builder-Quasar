@@ -17,9 +17,10 @@
       <q-card-section v-else :class="['row items-center', 'text-h6', [item.item_slot_type + '-darker']]">
         Active
       </q-card-section>
-
       <div class="q-pa-md">
-        
+        <div v-if="item.properties.AbilityCooldown?.value > 0">
+          Ability Cooldown {{ item.properties.AbilityCooldown.value }} s
+        </div>
       </div>
 
       <q-card-actions class="flex justify-end">
