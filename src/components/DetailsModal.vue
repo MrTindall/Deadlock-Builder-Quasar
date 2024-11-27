@@ -15,16 +15,18 @@
         Passive
       </q-card-section>
 
-      <div class="q-pa-md">
-        <div v-if="item.descriptionPassive">
+
+      <div class="q-pa-md q-mb-sm">
+        <div v-if="item.descriptionPassive" class="q-pb-sm">
           {{ item.descriptionPassive }}
         </div>
-        <div v-if="item.properties.AbilityCooldown?.value > 0">
+        <div v-if="item.properties.AbilityCooldown?.value > 0" class="q-pb-sm">
             Ability Cooldown {{ item.properties.AbilityCooldown.value }} s
         </div>
       </div>
+    
 
-      <q-card-section v-if="item.activation !== 'passive'" :class="['row items-center', 'text-h6', [item.item_slot_type + '-darker']]">
+      <q-card-section v-if="item.activation !== 'passive'" :class="['row items-center', 'text-h6', [item.item_slot_type + '-darker']]" class="q-pb-sm">
         Active
       </q-card-section>
       <div class="q-pa-md">
