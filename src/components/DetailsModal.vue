@@ -11,15 +11,25 @@
         Component of: {{ getComponentName(item, itemList) }}
       </q-card-section>
 
-      <q-card-section v-if="item.activation === 'passive'" :class="['row items-center', 'text-h6', [item.item_slot_type + '-darker']]">
+      <q-card-section :class="['row items-center', 'text-h6', [item.item_slot_type + '-darker']]">
         Passive
       </q-card-section>
-      <q-card-section v-else :class="['row items-center', 'text-h6', [item.item_slot_type + '-darker']]">
+
+      <div class="q-pa-md">
+        <div v-if="item.descriptionPassive">
+          {{ item.descriptionPassive }}
+        </div>
+        <div v-if="item.properties.AbilityCooldown?.value > 0">
+            Ability Cooldown {{ item.properties.AbilityCooldown.value }} s
+        </div>
+      </div>
+
+      <q-card-section v-if="item.activation !== 'passive'" :class="['row items-center', 'text-h6', [item.item_slot_type + '-darker']]">
         Active
       </q-card-section>
       <div class="q-pa-md">
-        <div v-if="item.properties.AbilityCooldown?.value > 0">
-          Ability Cooldown {{ item.properties.AbilityCooldown.value }} s
+        <div v-if="item.descriptionActive">
+          {{ item.descriptionActive }}
         </div>
       </div>
 
