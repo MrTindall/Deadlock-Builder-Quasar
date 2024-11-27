@@ -220,6 +220,9 @@ function filterAndSortItems(slotType) {
       });
   });
 }
+const weaponItems = filterAndSortItems("weapon");
+const vitalityItems = filterAndSortItems("vitality");
+const spiritItems = filterAndSortItems("spirit");
 
 const itemDescriptions = [
   {name:'upgrade_close_range', descriptionPassive: 'Passive: Deal additional Weapon Damage when in close range to your target.'},
@@ -268,10 +271,6 @@ const itemDescriptions = [
   {name:'', descriptionPassive: '', descriptionActive: ''},
   
 ];
-
-const weaponItems = filterAndSortItems("weapon");
-const vitalityItems = filterAndSortItems("vitality");
-const spiritItems = filterAndSortItems("spirit");
 </script>
 
 <style lang="scss">
