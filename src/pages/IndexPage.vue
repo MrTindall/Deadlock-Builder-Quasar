@@ -109,6 +109,7 @@ async function getAllItems() {
     const response = await axios.get(url, config);
     allItems.value = response.data;
     addIsActive(allItems.value);
+    addDescToItems(allItems.value, itemDescriptions)
     console.log(allItems.value);
   } catch (error) {
     console.error("Error fetching data from Deadlock API:", error);
@@ -191,6 +192,19 @@ function deleteItem(item) {
     foundItem.isActive = false;
   }
 }
+function addDescToItems(itemArr, itemDescArr) {
+  itemDescArr.forEach(item => {
+    const foundItem = itemArr.find((i) => i.class_name === item.name)
+    if(foundItem) {
+      if(item.descriptionPassive) {
+        foundItem.descriptionPassive = item.descriptionPassive;
+      }
+      if(item.descriptionActive) {
+        foundItem.descriptionActive = item.descriptionActive;
+      }
+    }
+  });
+}
 
 // Mounted
 onMounted(() => {
@@ -260,15 +274,15 @@ const itemDescriptions = [
   {name:'upgrade_tech_overflow', descriptionPassive: 'Passive: Gain bonus Spirit Power by charging up with your bullets on enemy heroes.'},
   {name:'upgrade_silencer', descriptionActive: 'Active (36s): For the next 4s, all your bullets immediately apply Silence. Silence prevents targets from using abilities.'},
   {name:'upgrade_surging_power', descriptionActive: 'Active (30s): Grants Lifesteal, Fire Rate, and Ammo. This added Ammo is not limited by your max magazine size.'},
-  {name:'', descriptionPassive: '', descriptionActive: ''},
-  {name:'', descriptionPassive: '', descriptionActive: ''},
-  {name:'', descriptionPassive: '', descriptionActive: ''},
-  {name:'', descriptionPassive: '', descriptionActive: ''},
-  {name:'', descriptionPassive: '', descriptionActive: ''},
-  {name:'', descriptionPassive: '', descriptionActive: ''},
-  {name:'', descriptionPassive: '', descriptionActive: ''},
-  {name:'', descriptionPassive: '', descriptionActive: ''},
-  {name:'', descriptionPassive: '', descriptionActive: ''},
+  // {name:'', descriptionPassive: '', descriptionActive: ''},
+  // {name:'', descriptionPassive: '', descriptionActive: ''},
+  // {name:'', descriptionPassive: '', descriptionActive: ''},
+  // {name:'', descriptionPassive: '', descriptionActive: ''},
+  // {name:'', descriptionPassive: '', descriptionActive: ''},
+  // {name:'', descriptionPassive: '', descriptionActive: ''},
+  // {name:'', descriptionPassive: '', descriptionActive: ''},
+  // {name:'', descriptionPassive: '', descriptionActive: ''},
+  // {name:'', descriptionPassive: '', descriptionActive: ''},
   
 ];
 </script>
