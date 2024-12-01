@@ -37,26 +37,28 @@
 
         <q-tab-panels v-model="tab" animated>
           <q-tab-panel name="build">
-            <div style="display: flex; justify-content: space-between;">
-              <div>
-                <h4 style="margin: 0;" >{{ selectedHero }}</h4>
-              </div>
-              <div class="q-pa-xs" style="width: 100%; max-width: 300px;">
-                <q-select 
-                  filled 
-                  v-model="model" 
-                  :options="options" 
-                  label="Select a Build" 
-                  bg-color="primary" 
-                  square 
-                  color="white"
-                  label-color="white"
-                />
-              </div>
+            <div style="display: flex; justify-content: space-between; align-items: center;">
+          <div>
+            <h4 style="margin: 0;">{{ selectedHero }}</h4>
+          </div>
+          <div style="display: flex; align-items: center; gap: 10px;"> 
+            <div class="q-pa-xs" style="width: 300px;">
+              <q-select 
+                filled 
+                v-model="model" 
+                :options="options" 
+                label="Select a Build" 
+                bg-color="primary" 
+                
+                color="white"
+                label-color="white"
+                style="width: 100%;" 
+              />
             </div>
-            
+            <q-btn color="primary" label="Save" style="height: 57px;"/>
+          </div>
+          </div>
             <PanelTab
-              
               :itemList="builtItems"
               @deleteItem="deleteItem"
             />
@@ -129,7 +131,7 @@ async function getAllItems() {
     allItems.value = response.data;
     addIsActive(allItems.value);
     addDescToItems(allItems.value, itemDescriptions)
-    // console.log(allItems.value);
+    console.log(allItems.value);
   } catch (error) {
     console.error("Error fetching data from Deadlock API:", error);
   } finally {
@@ -151,7 +153,7 @@ async function searchHeros() {
     const response = await axios.get(url, config);
     heros.value = response.data;
     addIsActive(heros.value);
-    console.log(heros.value)
+    // console.log(heros.value)
   } catch (error) {
     console.error("Error fetching data from Deadlock API:", error);
   } finally {
@@ -312,7 +314,7 @@ const itemDescriptions = [
   {name:'upgrade_debuff_reducer', descriptionPassive: 'Passive: Reduces the duration of all negative effects applied to you. '},
   {name:'upgrade_magic_shield', descriptionPassive: 'Passive: While you have a Spirit Shield, gain bonus Spirit Power and Cooldown Reduction.'},
   {name:'upgrade_cardio_calibrator', descriptionPassive: 'Passive: Reduces the effects of enemy Movement Slow'},
-  {name:'ability_trapper_fear', descriptionPassive: 'Passive: Your Spirit Damage applies Healing Reduction. If an enemy hero dies under this effect, you receive a large heal.'},
+  {name:'upgrade_healbane', descriptionPassive: 'Passive: Your Spirit Damage applies Healing Reduction. If an enemy hero dies under this effect, you receive a large heal.'},
   {name:'upgrade_healing_booster', descriptionPassive: 'Passive: Increases the effectiveness of your Healing and increases your resistance to healing reduction.'},
   {name:'upgrade_vex_barrier', descriptionPassive: 'Passive: Automatically deploy temporary Bullet and Spirit Shields when you are movement locked, Stunned, Chained, Immobilized, or Slept.'},
   {name:'upgrade_savior', descriptionActive: 'Active: Provide the target with Bullet Shield, Spirit Shield, and Movement Speed. Can be self-cast.'},

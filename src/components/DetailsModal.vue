@@ -21,7 +21,7 @@
           {{ item.descriptionPassive }}
         </div>
         <div v-if="item.properties.AbilityCooldown?.value > 0" class="q-pb-sm">
-            Ability Cooldown {{ item.properties.AbilityCooldown.value }} s
+            Ability Cooldown {{ item.properties.AbilityCooldown.value }}s
         </div>
       </div>
     
