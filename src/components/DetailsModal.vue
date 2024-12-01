@@ -23,6 +23,82 @@
         <div v-if="item.properties.AbilityCooldown?.value > 0" class="q-pb-sm">
             Ability Cooldown {{ item.properties.AbilityCooldown.value }}s
         </div>
+        <div v-if="item.properties.AbilityCastDelay?.value > 0" class="q-pb-sm">
+            Ability Cast Delay {{ item.properties.AbilityCastDelay.value }}s
+        </div>
+        <div v-if="item.properties.AbilityDuration?.value > 0" class="q-pb-sm">
+            Ability Duration {{ item.properties.AbilityDuration.value }}s
+        </div>
+        <div v-if="item.properties.BonusAbilityCharges?.value > 0" class="q-pb-sm">
+            + {{ item.properties.BonusAbilityCharges.value }} Bonus Ability Charge(s) 
+        </div>
+        <div v-if="item.properties.CooldownReductionOnChargedAbilities?.value > 0" class="q-pb-sm">
+            + {{ item.properties.CooldownReductionOnChargedAbilities.value }}% Cooldown on Charged Abilities 
+        </div>
+        <div v-if="item.properties.BonusHealth?.value > 0" class="q-pb-sm">
+            + {{ item.properties.BonusHealth.value }} Bonus Health 
+        </div>
+        <div v-if="item.properties.BonusHealthRegen?.value > 0" class="q-pb-sm">
+            + {{ item.properties.BonusHealthRegen.value }} Health Regen
+        </div>
+        <div v-if="item.properties.AbilityLifestealPercentHero?.value > 0" class="q-pb-sm">
+            + {{ item.properties.AbilityLifestealPercentHero.value }}% Spirit Lifesteal
+        </div>
+        <div v-if="item.properties.BaseAttackDamagePercent?.value > 0" class="q-pb-sm">
+            + {{ item.properties.BaseAttackDamagePercent.value }}% Weapon Damage 
+        </div>
+        <div v-if="item.properties.TechPower?.value > 0" class="q-pb-sm">
+            + {{ item.properties.TechPower.value }} Spirit Power
+        </div>
+        <div v-if="item.properties.Stamina?.value > 0" class="q-pb-sm">
+            + {{ item.properties.Stamina.value }} Stamina charge(s)
+        </div>
+        <div v-if="item.properties.BonusClipSizePercent?.value > 0" class="q-pb-sm">
+            + {{ item.properties.BonusClipSizePercent.value }}% Ammo
+        </div>
+        <div v-if="item.properties.BonusFireRate?.value > 0" class="q-pb-sm">
+            + {{ item.properties.BonusFireRate.value }}% Fire Rate
+        </div>
+        <div v-if="item.properties.HeadShotBonusDamage?.value > 0" class="q-pb-sm">
+            + {{ item.properties.HeadShotBonusDamage.value }} Bonus Headshot Damage
+        </div>
+        <div v-if="item.properties.BulletResist?.value > 0" class="q-pb-sm">
+            {{ item.properties.BulletResist.value }}% Bullet Resist
+        </div>
+        <div v-if="item.properties.TechResist?.value" class="q-pb-sm">
+            {{ item.properties.TechResist.value }}% Spirit Resist
+        </div>
+        <div v-if="item.properties.TechArmorDamageReduction?.value" class="q-pb-sm">
+            {{ item.properties.TechArmorDamageReduction.value }}% Spirit Resist on Spirit Damage
+        </div>
+        <div v-if="item.properties.MagicIncreasePerStack?.value > 0" class="q-pb-sm">
+            +{{ item.properties.MagicIncreasePerStack.value }} Spirit Amp per Stack
+        </div>
+        <div v-if="item.properties.MaxStacks?.value > 0" class="q-pb-sm">
+            {{ item.properties.MaxStacks.value }} Max Stacks
+        </div>
+        <div v-if="item.properties.ProcCooldown?.value > 0" class="q-pb-sm">
+            {{ item.properties.ProcCooldown.value }}s Proc Cooldown
+        </div>
+        <div v-if="item.properties.AttackDamageWhenShielded?.value > 0" class="q-pb-sm">
+            + {{ item.properties.AttackDamageWhenShielded.value }}% Attack Damage When Shielded
+        </div>
+        <div v-if="item.properties.BulletShieldMaxHealth?.value > 0" class="q-pb-sm">
+            + {{ item.properties.BulletShieldMaxHealth.value }} Bullet Shield
+        </div>
+        <div v-if="item.properties.FireRateWhenShielded?.value > 0" class="q-pb-sm">
+            + {{ item.properties.FireRateWhenShielded.value }}% Fire Rate When Shielded
+        </div>
+
+        <div v-if="item.properties.BonusSpiritWithMagicShield?.value > 0" class="q-pb-sm">
+            + {{ item.properties.BonusSpiritWithMagicShield.value }} Spirit While Shielded
+        </div>
+        <div v-if="item.properties.CooldownReductionWithShield?.value > 0" class="q-pb-sm">
+            + {{ item.properties.CooldownReductionWithShield.value }}% Cooldown Reduction While Shielded
+        </div>
+        <div v-if="item.properties.TechShieldMaxHealth?.value > 0" class="q-pb-sm">
+            + {{ item.properties.TechShieldMaxHealth.value }} Spirit Shield
+        </div>
       </div>
     
 
@@ -30,8 +106,14 @@
         Active
       </q-card-section>
       <div class="q-pa-md">
-        <div v-if="item.descriptionActive">
+        <div v-if="item.descriptionActive" class="q-pb-sm">
           {{ item.descriptionActive }}
+        </div>
+        <div v-if="item.properties.RegenDuration?.value > 0" class="q-pb-sm">
+            {{ item.properties.RegenDuration.value }}s Regen Duration
+        </div>
+        <div v-if="item.properties.TotalHealthRegen?.value > 0" class="q-pb-sm">
+            {{ item.properties.TotalHealthRegen.value }} Total Health Regen
         </div>
       </div>
 
