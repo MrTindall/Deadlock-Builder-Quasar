@@ -275,7 +275,7 @@ const spiritItems = filterAndSortItems("spirit");
 const itemDescriptions = [
   {name:'upgrade_close_range', descriptionPassive: 'Passive: Deal additional Weapon Damage when in close range to your target.'},
   {name:'upgrade_headshot_booster', descriptionPassive: 'Passive: Deal bonus Weapon Damage with headshots'},
-  {name:'upgrade_hollow_point_rounds', description: 'Passive: When you are above 60% health, deal additional Weapon Damage.'},
+  {name:'upgrade_hollow_point_rounds', descriptionPassive: 'Passive: When you are above 60% health, deal additional Weapon Damage.'},
   {name:'upgrade_medic_bullets', descriptionPassive: 'Passive: Your next bullet will heal you based on what target you hit.'},
   {name:'upgrade_active_reload', descriptionPassive: 'Passive: While reloading, pressing [R] during the highlighted portion will instantly finish your reload and grant you Fire Rate and Bullet Lifesteal.'},
   {name:'upgrade_berserker', descriptionPassive: 'Passive: Your Weapon Damage increases as you take sustained damage.'},
