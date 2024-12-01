@@ -94,6 +94,10 @@ body {
     box-shadow: 0 4px 15px rgba(0, 119, 255, 0.1);
     cursor: pointer;
 }
+.hero-active {
+    transform: translateX(10px);
+    box-shadow: 0 4px 15px #075fa798;
+  }
 
 @media (max-width: 600px) {
     .q-tab-panels {

@@ -189,8 +189,14 @@ function handleTabChange(newTab) {
 }
 
 function selectHero(hero) {
-  heros.value.forEach(hero => hero.isActive = false)
-  hero.isActive = true
+  if(!hero.isActive) {
+    heros.value.forEach(hero => hero.isActive = false)
+    hero.isActive = true
+    selectedHero.value = hero.name
+  } else {
+    hero.isActive = false
+    selectedHero.value = "Select a Hero"
+  }
 }
 
 function addToBuild(item) {

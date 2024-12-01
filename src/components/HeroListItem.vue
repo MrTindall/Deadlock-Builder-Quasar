@@ -5,7 +5,7 @@
     class="full-width selectable-card-btn" 
     @click="selectHero"
   >
-    <q-card class="hero" bordered>
+    <q-card class="hero" :class="{ 'hero-active': hero.isActive }"  bordered>
       <q-card-section horizontal>
         <q-img class="col hero-icon-img" :src="hero.images.icon_hero_card" />
         <q-card-actions vertical>
