@@ -1,7 +1,7 @@
 <template>
   <q-list>
     <q-item v-for="hero in heroList" :key="hero.id"> 
-      <HeroListItem :hero="hero"></HeroListItem>
+      <HeroListItem :hero="hero" @heroIsActive="selectHero"></HeroListItem>
     </q-item>
   </q-list>
 </template>
@@ -17,6 +17,11 @@ export default {
     heroList: {
       type: Array,
       Required: true,
+    },
+  },
+  methods: {
+    selectHero(hero) {
+      this.$emit("heroIsActive", hero);
     },
   },
 };

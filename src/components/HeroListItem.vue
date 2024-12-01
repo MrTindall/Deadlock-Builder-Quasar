@@ -43,8 +43,7 @@ export default {
       alert("Name: " + this.hero.name);
     },
     selectHero() {
-      // Placeholder, will eventually add to build
-      alert("Selected: " + this.hero.name);
+      this.$emit("heroIsActive", this.hero);
     },
   },
 };

@@ -14,7 +14,7 @@
   </q-header>
 
   <q-drawer v-model="leftDrawerOpen" show-if-above bordered>
-    <HeroList :heroList="filteredHeros"></HeroList>
+    <HeroList :heroList="filteredHeros" @heroIsActive="selectHero"></HeroList>
   </q-drawer>
 
   <div class="q-pa-md">
@@ -37,8 +37,26 @@
 
         <q-tab-panels v-model="tab" animated>
           <q-tab-panel name="build">
+            <div style="display: flex; justify-content: space-between;">
+              <div>
+                <h4 style="margin: 0;" >{{ selectedHero }}</h4>
+              </div>
+              <div class="q-pa-xs" style="width: 100%; max-width: 300px;">
+                <q-select 
+                  filled 
+                  v-model="model" 
+                  :options="options" 
+                  label="Select a Build" 
+                  bg-color="primary" 
+                  square 
+                  color="white"
+                  label-color="white"
+                />
+              </div>
+            </div>
+            
             <PanelTab
-              :name="'Builder'"
+              
               :itemList="builtItems"
               @deleteItem="deleteItem"
             />
@@ -93,6 +111,7 @@ const heros = ref([]);
 const builtItems = ref([]);
 const tab = ref("build");
 const allItems = ref([]);
+let selectedHero = ref("Select a Hero")
 
 
 // async functions
@@ -110,7 +129,7 @@ async function getAllItems() {
     allItems.value = response.data;
     addIsActive(allItems.value);
     addDescToItems(allItems.value, itemDescriptions)
-    console.log(allItems.value);
+    // console.log(allItems.value);
   } catch (error) {
     console.error("Error fetching data from Deadlock API:", error);
   } finally {
@@ -132,7 +151,7 @@ async function searchHeros() {
     const response = await axios.get(url, config);
     heros.value = response.data;
     addIsActive(heros.value);
-    // console.log(heros.value)
+    console.log(heros.value)
   } catch (error) {
     console.error("Error fetching data from Deadlock API:", error);
   } finally {
@@ -167,6 +186,11 @@ function handleTabChange(newTab) {
   } else {
     items.value = [];
   }
+}
+
+function selectHero(hero) {
+  heros.value.forEach(hero => hero.isActive = false)
+  hero.isActive = true
 }
 
 function addToBuild(item) {
@@ -234,6 +258,8 @@ function filterAndSortItems(slotType) {
       });
   });
 }
+
+
 const weaponItems = filterAndSortItems("weapon");
 const vitalityItems = filterAndSortItems("vitality");
 const spiritItems = filterAndSortItems("spirit");
@@ -336,4 +362,7 @@ const itemDescriptions = [
   .q-tabs {
     height: 50px;
   }
+  // .q-select {
+  //   color: white;
+  // }
 </style>
