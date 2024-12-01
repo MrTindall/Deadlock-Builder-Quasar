@@ -47,6 +47,9 @@
         <div v-if="item.properties.BaseAttackDamagePercent?.value > 0" class="q-pb-sm">
             + {{ item.properties.BaseAttackDamagePercent.value }}% Weapon Damage 
         </div>
+        <div v-if="item.properties.BonusMeleeDamagePercent?.value > 0" class="q-pb-sm">
+            + {{ item.properties.BonusMeleeDamagePercent.value }}% Melee Damage 
+        </div>
         <div v-if="item.properties.TechPower?.value > 0" class="q-pb-sm">
             + {{ item.properties.TechPower.value }} Spirit Power
         </div>
@@ -89,7 +92,6 @@
         <div v-if="item.properties.FireRateWhenShielded?.value > 0" class="q-pb-sm">
             + {{ item.properties.FireRateWhenShielded.value }}% Fire Rate When Shielded
         </div>
-
         <div v-if="item.properties.BonusSpiritWithMagicShield?.value > 0" class="q-pb-sm">
             + {{ item.properties.BonusSpiritWithMagicShield.value }} Spirit While Shielded
         </div>
@@ -98,6 +100,80 @@
         </div>
         <div v-if="item.properties.TechShieldMaxHealth?.value > 0" class="q-pb-sm">
             + {{ item.properties.TechShieldMaxHealth.value }} Spirit Shield
+        </div>
+        <div v-if="item.properties.BonusMoveSpeed?.value" class="q-pb-sm">
+            + {{ item.properties.BonusMoveSpeed.value }} Move Speed
+        </div>
+        <div v-if="item.properties.BonusSprintSpeed?.value" class="q-pb-sm">
+            + {{ item.properties.BonusSprintSpeed.value }} Sprint Speed
+        </div>
+        <div v-if="item.properties.SlowResistancePercent?.value" class="q-pb-sm">
+            + {{ item.properties.SlowResistancePercent.value }}% Slow Resistance
+        </div>
+        <div v-if="item.properties.TechDamagePercent?.value > 0" class="q-pb-sm">
+            + {{ item.properties.TechDamagePercent.value }}% Spirit Damage (Conditional)
+        </div>
+        <div v-if="item.properties.MovementSpeedSlow?.value > 0" class="q-pb-sm">
+            + {{ item.properties.MovementSpeedSlow.value }}% Movement Speed Slow
+        </div>
+        <div v-if="item.properties.DelayDuration?.value > 0" class="q-pb-sm">
+            {{ item.properties.DelayDuration.value }}s Delay Duration
+        </div>
+        <div v-if="item.properties.Radius?.value" class="q-pb-sm">
+            {{ item.properties.Radius.value }} Radius
+        </div>
+        <div v-if="item.properties.TechRadiusMultiplier?.value > 0" class="q-pb-sm">
+            + {{ item.properties.TechRadiusMultiplier.value }}% Radius
+        </div>
+        <div v-if="item.properties.TechRangeMultiplier?.value" class="q-pb-sm">
+            + {{ item.properties.TechRangeMultiplier.value }}% Range
+        </div>
+        <div v-if="item.properties.CooldownReduction?.value" class="q-pb-sm">
+            + {{ item.properties.CooldownReduction.value }}% Cooldown Reduction
+        </div>
+        <div v-if="item.properties.BonusAbilityDurationPercent?.value" class="q-pb-sm">
+            + {{ item.properties.BonusAbilityDurationPercent.value }}% Duration
+        </div>
+        <div v-if="item.properties.ImbuedBonusDuration?.value" class="q-pb-sm">
+            + {{ item.properties.ImbuedBonusDuration.value }}% Imbued Duration
+        </div>
+        <div v-if="item.properties.NonImbuedBonusDuration?.value" class="q-pb-sm">
+            + {{ item.properties.NonImbuedBonusDuration.value }}% Non-Imbued Duration
+        </div>
+
+        <div v-if="item.properties.ImbuedCooldownReduction?.value" class="q-pb-sm">
+            + {{ item.properties.ImbuedCooldownReduction.value }}% Imbued Cooldown Reduction
+        </div>
+        <div v-if="item.properties.NonImbuedCooldownReduction?.value" class="q-pb-sm">
+            + {{ item.properties.NonImbuedCooldownReduction.value }}% Non-Imbued Cooldown Reduction
+        </div>
+        <div v-if="item.properties.ImbuedTechPower?.value > 0" class="q-pb-sm">
+            + {{ item.properties.ImbuedTechPower.value }}% Imbued Spirit Power
+        </div>
+        <div v-if="item.properties.MovementSpeedBonusDuration?.value > 0" class="q-pb-sm">
+            {{ item.properties.MovementSpeedBonusDuration.value }}s Move Speed Duration
+        </div>
+        <div v-if="item.properties.ProcBonusMagicDamage?.value > 0" class="q-pb-sm">
+            + {{ item.properties.ProcBonusMagicDamage.value }} Bonus Spirit Damage
+        </div>
+        <div v-if="item.properties.BonusHeavyMeleeDamage?.value > 0" class="q-pb-sm">
+            + {{ item.properties.BonusHeavyMeleeDamage.value }}% Bonus Melee Damage
+        </div>
+        <div v-if="item.properties.MeleeDistanceScale?.value > 0" class="q-pb-sm">
+            + {{ item.properties.MeleeDistanceScale.value }}% Bonus Melee Distance
+        </div>
+        <div v-if="item.properties.LongRangeBonusWeaponPower?.value > 0" class="q-pb-sm">
+            + {{ item.properties.LongRangeBonusWeaponPower.value }}% Long Range Weapon Damage
+        </div>
+        <div v-if="item.properties.LongRangeBonusWeaponPowerMinRange?.value" class="q-pb-sm">
+            {{ item.properties.LongRangeBonusWeaponPowerMinRange.value }} Minium Distance
+        </div>
+
+        <div v-if="item.properties.CloseRangeBonusWeaponPower?.value" class="q-pb-sm">
+            + {{ item.properties.CloseRangeBonusWeaponPower.value }} % Close Range Weapon Damage
+        </div>
+        <div v-if="item.properties.CloseRangeBonusDamageRange?.value" class="q-pb-sm">
+            {{ item.properties.CloseRangeBonusDamageRange.value }} Max Distance
         </div>
       </div>
     
@@ -114,6 +190,16 @@
         </div>
         <div v-if="item.properties.TotalHealthRegen?.value > 0" class="q-pb-sm">
             {{ item.properties.TotalHealthRegen.value }} Total Health Regen
+        </div>
+
+        <div v-if="item.properties.BonusClipSizePercent?.value > 0" class="q-pb-sm">
+            + {{ item.properties.BonusClipSizePercent.value }}% Bonus Ammo (Conditional)
+        </div>
+        <div v-if="item.properties.BonusClipDuration?.value > 0" class="q-pb-sm">
+            {{ item.properties.BonusClipDuration.value }}s Bonus Ammo Duration
+        </div>
+        <div v-if="item.properties.ActiveBonusMoveSpeed?.value" class="q-pb-sm">
+            + {{ item.properties.ActiveBonusMoveSpeed.value }} Move Speed (Conditional)
         </div>
       </div>
 
