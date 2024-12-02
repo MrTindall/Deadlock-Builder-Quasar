@@ -220,6 +220,12 @@
         <div v-if="item.properties.CloseRangeBonusDamageRange?.value" class="q-pb-sm">
             {{ item.properties.CloseRangeBonusDamageRange.value }} Max Distance
         </div>
+        <div v-if="item.properties.NonPlayerBonusWeaponPower?.value" class="q-pb-sm">
+            + {{ item.properties.NonPlayerBonusWeaponPower.value }}% NPC Damage
+        </div>
+        <div v-if="item.properties.NonPlayerBulletResist?.value" class="q-pb-sm">
+            + {{ item.properties.NonPlayerBulletResist.value }}% NPC Damage Resist
+        </div>
       </div>
     
 
@@ -287,7 +293,7 @@ export default {
 .q-card {
   width: 600px;
   max-width: 90vw;
-  height: 600px;
+  height: fit-content;
   max-height: 90vh;
 }
 </style>

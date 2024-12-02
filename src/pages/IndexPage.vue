@@ -42,11 +42,12 @@
               <h4 style="margin: 0; margin-bottom: 6px;">{{ selectedHero }}</h4>
             </div>
             <div v-show="selectedHero !== 'Select a Hero'" >
-              <q-btn color="primary" label="New" style="height: 56px; width: 148px; margin-right: 4px; margin-bottom: 3px;"/>
-              <q-btn color="primary" label="Save" style="height: 56px; width: 148px; margin-bottom: 3px; " />
+              <q-btn color="primary" label="New" style="height: 56px; width: 148px; margin-right: 4px; margin-bottom: 3px;" square/>
+              <q-btn color="primary" label="Save" style="height: 56px; width: 148px; margin-bottom: 3px;" square/>
               <div style="min-width: 200px; width: 300px; margin-bottom: 6px;">
                 <q-select 
                   filled 
+                  square
                   v-model="model" 
                   :options="options" 
                   label="Select a Build" 
@@ -137,7 +138,7 @@ async function getAllItems() {
     allItems.value = response.data;
     addIsActive(allItems.value);
     addDescToItems(allItems.value, itemDescriptions)
-    // console.log(allItems.value);
+    console.log(allItems.value);
   } catch (error) {
     console.error("Error fetching data from Deadlock API:", error);
   } finally {
