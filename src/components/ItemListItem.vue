@@ -21,7 +21,6 @@
             class="flex flex-start"
             style="width: fit-content; padding: 0; margin: 0"
           />
-          <!-- Pass itemList to the modal here -->
           <DetailsModal 
             v-model="itemDetails" 
             :item="item"
@@ -55,7 +54,7 @@ export default {
       required: true,
     },
     itemList: {
-      type: Array,  // Accept itemList as a prop
+      type: Array,
       required: true,
     },
   },
@@ -64,6 +63,7 @@ export default {
       itemDetails: false,
     };
   },
+
   methods: {
     addToBuild() {
       this.$emit("itemIsActive", this.item);
@@ -74,7 +74,6 @@ export default {
   },
 };
 </script>
-
 
 <style scoped lang="scss">
 .selectable-card-btn {

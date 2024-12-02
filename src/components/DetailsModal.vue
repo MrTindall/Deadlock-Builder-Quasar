@@ -1,11 +1,56 @@
 <template>
   <q-dialog backdrop-filter="blur(4px) desaturate(-150%)" ref="modal">
     <q-card :class="[item.item_slot_type + '-dark']">
-      <q-card-section :class="['row items-center', 'text-h6', item.item_slot_type]">
+      <q-card-section :class="['row items-center', 'text-h6', item.item_slot_type]" style="justify-content: space-between;">
+      <div>
         {{ item.name }}
         <br />
         ${{ item.cost }}
-      </q-card-section>
+      </div>
+      <div v-if="item.item_slot_type == 'weapon'">
+        <div v-if="item.item_tier === 1" style="text-align: right;">
+          +6% Weapon Damage
+        </div>
+        <div v-else-if="item.item_tier === 2" style="text-align: right;">
+          +10% Weapon Damage
+        </div>
+        <div v-else-if="item.item_tier === 3" style="text-align: right;">
+          +10% Weapon Damage
+        </div>
+        <div v-else-if="item.item_tier === 4" style="text-align: right;">
+          +18% Weapon Damage
+        </div>
+      </div>
+      <div v-else-if="item.item_slot_type == 'vitality'">
+        <div v-if="item.item_tier === 1" style="text-align: right;">
+          +11% Base Health
+        </div>
+        <div v-else-if="item.item_tier === 2" style="text-align: right;">
+          +14% Base Health
+        </div>
+        <div v-else-if="item.item_tier === 3" style="text-align: right;">
+          +17% Base Health
+        </div>
+        <div v-else-if="item.item_tier === 4" style="text-align: right;">
+          +20% Base Health
+        </div>
+      </div>
+      <div v-else-if="item.item_slot_type == 'spirit'">
+        <div v-if="item.item_tier === 1" style="text-align: right;">
+          +4 Spirit Power
+        </div>
+        <div v-else-if="item.item_tier === 2" style="text-align: right;">
+          +8 Spirit Power
+        </div>
+        <div v-else-if="item.item_tier === 3" style="text-align: right;">
+          +12 Spirit Power
+        </div>
+        <div v-else-if="item.item_tier === 4" style="text-align: right;">
+          +16 Spirit Power
+        </div>
+      </div>
+    
+  </q-card-section>
 
       <q-card-section v-if="item.component_items && item.component_items.length" :class="['row items-center', 'text-h6']">
         Component of: {{ getComponentName(item, itemList) }}
@@ -190,10 +235,6 @@
         </div>
         <div v-if="item.properties.TotalHealthRegen?.value > 0" class="q-pb-sm">
             {{ item.properties.TotalHealthRegen.value }} Total Health Regen
-        </div>
-
-        <div v-if="item.properties.BonusClipSizePercent?.value > 0" class="q-pb-sm">
-            + {{ item.properties.BonusClipSizePercent.value }}% Bonus Ammo (Conditional)
         </div>
         <div v-if="item.properties.BonusClipDuration?.value > 0" class="q-pb-sm">
             {{ item.properties.BonusClipDuration.value }}s Bonus Ammo Duration

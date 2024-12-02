@@ -5,10 +5,10 @@
       :key="item.id" 
       class="col-xl-2 col-lg-2 col-md-4 col-sm-4 col-xs-12 flex flex-center"
     >
-      <!-- Pass itemList down as a prop to ItemListItem -->
       <ItemListItem 
         :item="item" 
         :itemList="itemList"
+        :heroList="heroList"
         @itemIsActive="addToBuild" 
         @deleteItem="deleteItem" 
       />
@@ -29,6 +29,10 @@ export default {
       type: Array,
       required: true,
     },
+    heroList: {
+      type: Array,
+      required: true,
+    }
   },
   methods: {
     addToBuild(item) {

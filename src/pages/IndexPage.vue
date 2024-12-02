@@ -41,7 +41,7 @@
           <div>
             <h4 style="margin: 0;">{{ selectedHero }}</h4>
           </div>
-          <div style="display: flex; align-items: center; gap: 10px;"> 
+          <div v-show="selectedHero !== 'Select a Hero'" style="display: flex; align-items: center; gap: 10px;"> 
             <div class="q-pa-xs" style="width: 300px;">
               <q-select 
                 filled 
@@ -60,6 +60,7 @@
           </div>
             <PanelTab
               :itemList="builtItems"
+              :heroList="heroRecommendedItems"
               @deleteItem="deleteItem"
             />
           </q-tab-panel>
@@ -68,6 +69,7 @@
             <PanelTab
               :name="'Weapons'"
               :itemList="weaponItems"
+              :heroList="heroRecommendedItems"
               @itemIsActive="addToBuild"
               @deleteItem="deleteItem"
             />
@@ -77,6 +79,7 @@
             <PanelTab
               :name="'Vitality'"
               :itemList="vitalityItems"
+              :heroList="heroRecommendedItems"
               @itemIsActive="addToBuild"
               @deleteItem="deleteItem"
             />
@@ -86,6 +89,7 @@
             <PanelTab
               :name="'Spirit'"
               :itemList="spiritItems"
+              :heroList="heroRecommendedItems"
               @itemIsActive="addToBuild"
               @deleteItem="deleteItem"
             />
@@ -110,6 +114,7 @@ defineOptions({
 const leftDrawerOpen = ref(false);
 const items = ref([]);
 const heros = ref([]);
+const heroRecommendedItems = ref([]);
 const builtItems = ref([]);
 const tab = ref("build");
 const allItems = ref([]);
@@ -131,7 +136,7 @@ async function getAllItems() {
     allItems.value = response.data;
     addIsActive(allItems.value);
     addDescToItems(allItems.value, itemDescriptions)
-    console.log(allItems.value);
+    // console.log(allItems.value);
   } catch (error) {
     console.error("Error fetching data from Deadlock API:", error);
   } finally {
@@ -153,7 +158,7 @@ async function searchHeros() {
     const response = await axios.get(url, config);
     heros.value = response.data;
     addIsActive(heros.value);
-    // console.log(heros.value)
+    console.log(heros.value)
   } catch (error) {
     console.error("Error fetching data from Deadlock API:", error);
   } finally {
@@ -191,13 +196,16 @@ function handleTabChange(newTab) {
 }
 
 function selectHero(hero) {
-  if(!hero.isActive) {
-    heros.value.forEach(hero => hero.isActive = false)
-    hero.isActive = true
-    selectedHero.value = hero.name
+  if (!hero.isActive) {
+    heros.value.forEach((h) => (h.isActive = false));
+    hero.isActive = true;
+    selectedHero.value = hero.name;
+    heroRecommendedItems.value = heros.value.filter((h) => h.name === selectedHero.value);
+    heroRecommendedItems.value = heroRecommendedItems.value[0].recommended_upgrades;
   } else {
-    hero.isActive = false
-    selectedHero.value = "Select a Hero"
+    hero.isActive = false;
+    selectedHero.value = "Select a Hero";
+    heroRecommendedItems.value = [];
   }
 }
 
@@ -242,7 +250,6 @@ function addDescToItems(itemArr, itemDescArr) {
 onMounted(() => {
   searchHeros();
   getAllItems();
-
 });
 
 // Computed Properties
