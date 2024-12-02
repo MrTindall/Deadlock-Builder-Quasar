@@ -37,26 +37,27 @@
 
         <q-tab-panels v-model="tab" animated>
           <q-tab-panel name="build">
-            <div style="display: flex; justify-content: space-between; align-items: center;">
-          <div>
-            <h4 style="margin: 0;">{{ selectedHero }}</h4>
-          </div>
-          <div v-show="selectedHero !== 'Select a Hero'" style="display: flex; align-items: center; gap: 10px;"> 
-            <div class="q-pa-xs" style="width: 300px;">
-              <q-select 
-                filled 
-                v-model="model" 
-                :options="options" 
-                label="Select a Build" 
-                bg-color="primary" 
-                
-                color="white"
-                label-color="white"
-                style="width: 100%;" 
-              />
+          <div style="display: flex; justify-content: space-between; align-items: center;">
+            <div>
+              <h4 style="margin: 0;">{{ selectedHero }}</h4>
             </div>
-            <q-btn color="primary" label="Save" style="height: 57px;"/>
-          </div>
+            <div v-show="selectedHero !== 'Select a Hero'" class="q-px-md" style="display: flex; justify-content: end; flex-wrap: wrap;">
+              <q-btn color="primary" label="Create" style="height: 56px; width: 98px; margin-right: 3px; margin-bottom: 3px;" />
+              <q-btn color="primary" label="Save" style="height: 56px; width: 98px; margin-bottom: 3px;" />
+              <div class="" style="min-width: 200px; width: 20vw;  margin-left: 3px;">
+                <q-select 
+                  filled 
+                  v-model="model" 
+                  :options="options" 
+                  label="Select a Build" 
+                  bg-color="primary" 
+                  color="white"
+                  label-color="white"
+                  style="width: 100%;" 
+                />
+              </div> 
+            </div>
+            
           </div>
             <PanelTab
               :itemList="builtItems"
