@@ -37,14 +37,14 @@
 
         <q-tab-panels v-model="tab" animated>
           <q-tab-panel name="build">
-          <div style="display: flex; justify-content: space-between; align-items: center;">
+          <div style="display: flex; justify-content: space-between; flex-wrap: wrap;">
             <div>
-              <h4 style="margin: 0;">{{ selectedHero }}</h4>
+              <h4 style="margin: 0; margin-bottom: 6px;">{{ selectedHero }}</h4>
             </div>
-            <div v-show="selectedHero !== 'Select a Hero'" class="q-px-md" style="display: flex; justify-content: end; flex-wrap: wrap;">
-              <q-btn color="primary" label="Create" style="height: 56px; width: 98px; margin-right: 3px; margin-bottom: 3px;" />
-              <q-btn color="primary" label="Save" style="height: 56px; width: 98px; margin-bottom: 3px;" />
-              <div class="" style="min-width: 200px; width: 20vw;  margin-left: 3px;">
+            <div v-show="selectedHero !== 'Select a Hero'" >
+              <q-btn color="primary" label="New" style="height: 56px; width: 148px; margin-right: 4px; margin-bottom: 3px;"/>
+              <q-btn color="primary" label="Save" style="height: 56px; width: 148px; margin-bottom: 3px; " />
+              <div style="min-width: 200px; width: 300px; margin-bottom: 6px;">
                 <q-select 
                   filled 
                   v-model="model" 
@@ -56,9 +56,9 @@
                   style="width: 100%;" 
                 />
               </div> 
-            </div>
-            
+            </div>         
           </div>
+
             <PanelTab
               :itemList="builtItems"
               :heroList="heroRecommendedItems"
@@ -377,8 +377,5 @@ const itemDescriptions = [
 <style lang="scss">
   .q-tabs {
     height: 50px;
-  }
-  // .q-select {
-  //   color: white;
-  // }
+  }  
 </style>
