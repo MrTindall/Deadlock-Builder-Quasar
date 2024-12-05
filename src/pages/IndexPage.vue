@@ -25,7 +25,7 @@
           Hero Details
         </div>
         <div  style="display: flex; flex-direction: row; justify-content: space-between; align-items: center; width: 100%; margin-bottom: 6px; padding: 10px;">
-          <h4 style="margin: 0; margin-bottom: 6px;">{{ selectedHero }}</h4>
+          <h4 style="margin: 0;">{{ selectedHero }}</h4>
           <div style="min-width: 200px; width: 400px; display: flex; flex-direction: row; justify-content: space-between; align-items: center;" v-if="selectedHero !== 'Select a Hero'">
             <q-select 
               filled 
@@ -43,7 +43,8 @@
 
         <!-- first page content -->
         <div v-show="selectedHero !== 'Select a Hero'" class="q-pa-md">
-          <div><h5 class="q-ma-sm">Recommmended Upgrades</h5></div>
+          <div> <p>{{ displayHero.description.lore }}</p></div>
+          <div><h5 class="q-mb-sm">Recommmended Upgrades</h5></div>
           <PanelTab :itemList="recommendedItems" />
         </div>
       </div>
@@ -68,8 +69,7 @@
             <q-tab-panel name="build">
             <div style="display: flex; justify-content: space-between; flex-wrap: wrap; margin-bottom: 15px;">
               <div style="display: flex; flex-direction: row; justify-content: space-between; align-items: center; width: 100%; margin-bottom: 6px;">
-                <h4 style="margin: 0; margin-bottom: 6px;">{{ selectedHero }}</h4>
-                
+                <h4 style="margin: 0; margin-bottom: 6px;">{{ displayHero.name }}</h4>
                 <div style="display: flex; justify-content: end;">
                   <div style="display: flex; justify-content: space-between; flex-wrap: wrap; margin-bottom: 15px;">
                     <q-input
@@ -151,6 +151,7 @@ const builtItems = ref([]);
 const tab = ref("build");
 const allItems = ref([]);
 let selectedHero = ref("Select a Hero")
+let displayHero = ref([])
 const startBuild = ref(false);
 const buildName = ref('')
 
@@ -234,6 +235,7 @@ function selectHero(hero) {
     heros.value.forEach((h) => (h.isActive = false));
     hero.isActive = true;
     selectedHero.value = hero.name;
+    displayHero.value = hero;
     heroRecommendedItems.value = heros.value.filter((h) => h.name === selectedHero.value);
     heroRecommendedItems.value = heroRecommendedItems.value[0].recommended_upgrades;
     heroRecommendedItems.value = allItems.value.filter(item =>
@@ -435,5 +437,8 @@ const itemDescriptions = [
 <style lang="scss">
   .q-tabs {
     height: 50px;
-  }  
+  }
+  p{
+    font-size: 1.2rem;
+  }
 </style>
