@@ -10,7 +10,7 @@
         @click="toggleLeftDrawer"
         v-if="!startBuild"
       />
-      <q-toolbar-title> DeadSmith </q-toolbar-title>
+      <q-toolbar-title> <h4>DeadSmith</h4> </q-toolbar-title>
     </q-toolbar>
   </q-header>
 
@@ -40,8 +40,12 @@
             <q-btn color="primary" label="Build" style="height: 56px; width: 148px; margin-left: 8px; " @click="toggleStartBuild"/>
           </div> 
         </div> 
-        <div v-show="selectedHero !== 'Select a Hero'">
-            
+
+        <!-- first page content -->
+        <div v-show="selectedHero !== 'Select a Hero'" class="q-pa-md">
+          <li v-for="item in heroRecommendedItems" :key="item.id">
+            {{ item.name }}
+          </li>
         </div>
       </div>
       <div v-else>
@@ -233,6 +237,9 @@ function selectHero(hero) {
     selectedHero.value = hero.name;
     heroRecommendedItems.value = heros.value.filter((h) => h.name === selectedHero.value);
     heroRecommendedItems.value = heroRecommendedItems.value[0].recommended_upgrades;
+    heroRecommendedItems.value = allItems.value.filter(item =>
+      heroRecommendedItems.value.some(name => item.class_name === name)
+    );
   } else {
     hero.isActive = false;
     selectedHero.value = "Select a Hero";
@@ -294,6 +301,7 @@ onMounted(() => {
 });
 
 // Computed Properties
+
 const filteredHeros = computed(() => {
   return heros.value
     .filter((hero) => hero.in_development === false)
