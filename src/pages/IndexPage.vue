@@ -1,6 +1,6 @@
 <template>
   <q-header elevated>
-    <q-toolbar style="height: 100px">
+    <q-toolbar style="height: 100px" >
       <q-btn
         flat
         dense
@@ -8,6 +8,7 @@
         icon="menu"
         aria-label="Menu"
         @click="toggleLeftDrawer"
+        v-if="!startBuild"
       />
       <q-toolbar-title> DeadSmith </q-toolbar-title>
     </q-toolbar>
@@ -19,26 +20,27 @@
 
   <div class="q-pa-md">
     <div class="q-gutter-y-md" style="max-width: 100%">
-      <div v-if="!startBuild">
-        <div  style="display: flex; flex-direction: row; justify-content: space-between; align-items: center; width: 100%; margin-bottom: 6px;">
+      <div v-if="!startBuild" class="heroDetailCard">
+        <div class="primaryColorBar" style="">
+          Hero Details
+        </div>
+        <div  style="display: flex; flex-direction: row; justify-content: space-between; align-items: center; width: 100%; margin-bottom: 6px; padding: 10px;">
           <h4 style="margin: 0; margin-bottom: 6px;">{{ selectedHero }}</h4>
           <div style="min-width: 200px; width: 400px; display: flex; flex-direction: row; justify-content: space-between; align-items: center;" v-if="selectedHero !== 'Select a Hero'">
-              <q-select 
-                filled 
-                square
-                v-model="model" 
-                :options="options" 
-                label="Select a Build" 
-                bg-color="primary" 
-                color="white"
-                label-color="white"
-                style="width: 100%;" 
-              />
-              <q-btn color="primary" label="Build" style="height: 56px; width: 148px; margin-left: 8px; " square/>
-            </div> 
-            
+            <q-select 
+              filled 
+              v-model="model" 
+              :options="options" 
+              label="Select a Build" 
+              bg-color="primary" 
+              color="white"
+              label-color="white"
+              style="width: 100%;" 
+            />
+            <q-btn color="primary" label="Build" style="height: 56px; width: 148px; margin-left: 8px; " @click="toggleStartBuild"/>
+          </div> 
         </div> 
-        <div v-show="selectedHero !== 'Select a Hero'" >
+        <div v-show="selectedHero !== 'Select a Hero'">
             
         </div>
       </div>
@@ -62,9 +64,12 @@
           <q-tab-panels v-model="tab" animated>
             <q-tab-panel name="build">
             <div style="display: flex; justify-content: space-between; flex-wrap: wrap;">
-              <div>
+              <div  style="display: flex; flex-direction: row; justify-content: space-between; align-items: center; width: 100%; margin-bottom: 6px;">
                 <h4 style="margin: 0; margin-bottom: 6px;">{{ selectedHero }}</h4>
-              </div>         
+                <div style="min-width: 200px; width: 400px; display: flex; justify-content: end;">
+                  <q-btn color="primary" label="Save" style="height: 56px; width: 148px;" @click="saveBuild"/>
+                </div> 
+              </div>        
             </div>
 
               <PanelTab
@@ -130,6 +135,7 @@ const builtItems = ref([]);
 const tab = ref("build");
 const allItems = ref([]);
 let selectedHero = ref("Select a Hero")
+const startBuild = ref(false);
 
 
 // async functions
@@ -255,6 +261,16 @@ function addDescToItems(itemArr, itemDescArr) {
       }
     }
   });
+}
+function toggleStartBuild() {
+  if(selectedHero !== 'Select a Hero') {
+    startBuild.value = !startBuild.value;
+  }
+}
+
+function saveBuild() {
+  // will need to add logic
+  startBuild.value = !startBuild.value;
 }
 
 // Mounted
