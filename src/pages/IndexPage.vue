@@ -63,7 +63,7 @@
 
           <q-tab-panels v-model="tab" animated>
             <q-tab-panel name="build">
-            <div style="display: flex; justify-content: space-between; flex-wrap: wrap;">
+            <div style="display: flex; justify-content: space-between; flex-wrap: wrap; margin-bottom: 15px;">
               <div  style="display: flex; flex-direction: row; justify-content: space-between; align-items: center; width: 100%; margin-bottom: 6px;">
                 <h4 style="margin: 0; margin-bottom: 6px;">{{ selectedHero }}</h4>
                 <div style="min-width: 200px; width: 400px; display: flex; justify-content: end;">
