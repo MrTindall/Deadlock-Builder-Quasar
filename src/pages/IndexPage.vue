@@ -43,9 +43,8 @@
 
         <!-- first page content -->
         <div v-show="selectedHero !== 'Select a Hero'" class="q-pa-md">
-          <li v-for="item in heroRecommendedItems" :key="item.id">
-            {{ item.name }}
-          </li>
+          <div><h5 class="q-ma-sm">Recommmended Upgrades</h5></div>
+          <PanelTab :itemList="recommendedItems" />
         </div>
       </div>
       <div v-else>
@@ -308,6 +307,15 @@ const filteredHeros = computed(() => {
     .sort((a, b) => a.name.localeCompare(b.name));
 });
 
+const recommendedItems = computed(() => {
+  return heroRecommendedItems.value.sort((a, b) => {
+    const costDifference = a.cost - b.cost;
+    return costDifference !== 0
+      ? costDifference
+      : a.name.localeCompare(b.name);
+  });
+});
+
 function filterAndSortItems(slotType) {
   return computed(() => {
     return allItems.value
@@ -322,6 +330,8 @@ function filterAndSortItems(slotType) {
       });
   });
 }
+
+
 
 
 const weaponItems = filterAndSortItems("weapon");
