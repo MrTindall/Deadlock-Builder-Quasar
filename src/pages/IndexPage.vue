@@ -18,10 +18,10 @@
     <HeroList :heroList="filteredHeros" @heroIsActive="selectHero"></HeroList>
   </q-drawer>
 
-  <div class="q-pa-md">
+  <div class="q-pa-md scroll">
     <div class="q-gutter-y-md" style="max-width: 100%">
       <div v-if="!startBuild" class="heroDetailCard">
-        <div class="primaryColorBar" style="">
+        <div class="primaryColorBar">
           Hero Details
         </div>
         <div  style="display: flex; flex-direction: row; justify-content: space-between; align-items: center; width: 100%; margin-bottom: 6px; padding: 10px;">
@@ -43,8 +43,11 @@
 
         <!-- first page content -->
         <div v-show="selectedHero !== 'Select a Hero'" class="q-pa-md">
-          <div> <p>{{ displayHero.description.lore }}</p></div>
-          <div><h5 class="q-mb-sm">Recommmended Upgrades</h5></div>
+          <div> <p style="font-size: 1.5rem; margin: 0; color: #075fa7;">Lore: </p></div>
+          <div class="q-pl-lg">
+            <p v-if="displayHero.description?.lore">{{ displayHero.description.lore }}</p>
+          </div>
+          <h5 style="color: #075fa7;">Recommmended Upgrades</h5>
           <PanelTab :itemList="recommendedItems" />
         </div>
       </div>
