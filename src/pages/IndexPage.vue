@@ -147,6 +147,7 @@ import axios from "axios";
 import PanelTab from "src/components/PanelTab.vue";
 import HeroList from "src/components/HeroList.vue";
 import Build from "src/models/Build.js"
+import { data } from "autoprefixer";
 
 defineOptions({
   name: "IndexPage",
@@ -165,8 +166,7 @@ let displayHero = ref([])
 const startBuild = ref(false);
 const buildName = ref('')
 const characterBuilds = []
-
-
+const model = ref('');
 
 // async functions
 async function getAllItems() {
