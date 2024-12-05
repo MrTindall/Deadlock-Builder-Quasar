@@ -38,14 +38,14 @@ body {
     background-color: $primary-dark;
     overflow-y: auto;
     overflow-x: hidden;
-    height: 80vh
+    height: calc(100vh - 185px);
 }
 
 .heroDetailCard {
     background-color: $primary-dark;
     overflow-y: auto;
     overflow-x: hidden;
-    height: 80vh;
+    height: calc(100vh - 132px);
 }
 .primaryColorBar {
     background-color: $primary;
