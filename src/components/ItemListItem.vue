@@ -27,7 +27,7 @@
             :itemList="itemList"
           />
           <q-btn
-            v-if="item.isActive"
+            v-if="item.isActive && isPickable"
             icon="delete"
             flat
             unelevated
@@ -57,6 +57,7 @@ export default {
       type: Array,
       required: true,
     },
+    isPickable: Boolean,
   },
   data() {
     return {

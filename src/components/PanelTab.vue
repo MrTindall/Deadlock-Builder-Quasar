@@ -2,7 +2,7 @@
   <div>
     <div class="text-h6">{{ name }}</div>
     <div>
-      <ItemList :itemList="itemList" :heroList="heroList" @itemIsActive="addToBuild" @deleteItem="deleteItem"/>
+      <ItemList :itemList="itemList" :heroList="heroList" :isPickable="isPickable" @itemIsActive="addToBuild" @deleteItem="deleteItem"/>
     </div>
   </div>
 </template>
@@ -26,7 +26,8 @@ export default {
     heroList: {
       type: Array,
       required: true,
-    }
+    },
+    isPickable: Boolean,
   },
   methods: {
     addToBuild(item) {

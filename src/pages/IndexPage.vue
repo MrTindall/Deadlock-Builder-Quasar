@@ -30,12 +30,13 @@
             <q-select 
               filled 
               v-model="model" 
-              :options="options" 
+              :options="buildOptions" 
               label="Select a Build" 
               bg-color="primary" 
               color="white"
               label-color="white"
-              style="width: 100%;" 
+              style="width: 100%;"
+              
             />
             <q-btn color="primary" label="Build" style="height: 56px; width: 148px; margin-left: 8px; " @click="toggleStartBuild"/>
           </div> 
@@ -48,7 +49,7 @@
             <p v-if="displayHero.description?.lore">{{ displayHero.description.lore }}</p>
           </div>
           <h5 style="color: #075fa7;">Recommmended Upgrades</h5>
-          <PanelTab :itemList="recommendedItems" />
+          <PanelTab :itemList="recommendedItems" :is-pickable="false" />
         </div>
       </div>
       <div v-else>
@@ -85,6 +86,7 @@
                       input-style="color: white"
                     />
                     <q-btn v-show="buildName !== ''" color="primary" label="Save" style="height: 56px; width: 148px;" @click="saveBuild"/>
+                    <q-btn label="Cancel" style="height: 56px; width: 148px;" @click="cancelBuild"/>
                   </div>
                 </div>
                  
@@ -94,6 +96,7 @@
               <PanelTab
                 :itemList="builtItems"
                 :heroList="heroRecommendedItems"
+                :is-pickable="true"
                 @deleteItem="deleteItem"
               />
             </q-tab-panel>
@@ -103,6 +106,7 @@
                 :name="'Weapons'"
                 :itemList="weaponItems"
                 :heroList="heroRecommendedItems"
+                :is-pickable="true"
                 @itemIsActive="addToBuild"
                 @deleteItem="deleteItem"
               />
@@ -113,6 +117,7 @@
                 :name="'Vitality'"
                 :itemList="vitalityItems"
                 :heroList="heroRecommendedItems"
+                :is-pickable="true"
                 @itemIsActive="addToBuild"
                 @deleteItem="deleteItem"
               />
@@ -123,6 +128,7 @@
                 :name="'Spirit'"
                 :itemList="spiritItems"
                 :heroList="heroRecommendedItems"
+                :is-pickable="true"
                 @itemIsActive="addToBuild"
                 @deleteItem="deleteItem"
               />
@@ -140,6 +146,7 @@ import { ref, computed, onMounted } from "vue";
 import axios from "axios";
 import PanelTab from "src/components/PanelTab.vue";
 import HeroList from "src/components/HeroList.vue";
+import Build from "src/models/Build.js"
 
 defineOptions({
   name: "IndexPage",
@@ -157,6 +164,8 @@ let selectedHero = ref("Select a Hero")
 let displayHero = ref([])
 const startBuild = ref(false);
 const buildName = ref('')
+const characterBuilds = []
+
 
 
 // async functions
@@ -293,8 +302,17 @@ function toggleStartBuild() {
   }
 }
 
+// buildName
 function saveBuild() {
   // will need to add logic
+  const buildArr = allItems.value.filter(item => item.isActive === true);
+  console.log(buildArr)
+  characterBuilds.push(new Build(buildName.value, buildArr))
+  console.log(characterBuilds);
+  startBuild.value = !startBuild.value;
+}
+
+function cancelBuild() {
   startBuild.value = !startBuild.value;
 }
 
@@ -321,6 +339,14 @@ const recommendedItems = computed(() => {
   });
 });
 
+const buildOptions = computed(() => {
+  return characterBuilds.map(build => ({
+    label: build.name, // Display name in the dropdown
+    value: build.name, // Value bound to v-model
+  }));
+});
+    
+
 function filterAndSortItems(slotType) {
   return computed(() => {
     return allItems.value
@@ -335,9 +361,6 @@ function filterAndSortItems(slotType) {
       });
   });
 }
-
-
-
 
 const weaponItems = filterAndSortItems("weapon");
 const vitalityItems = filterAndSortItems("vitality");
@@ -444,4 +467,10 @@ const itemDescriptions = [
   p{
     font-size: 1.2rem;
   }
+
+.q-menu{
+  color: white;
+  background-color: $primary-dark;
+}
+
 </style>
