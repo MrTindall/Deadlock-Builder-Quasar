@@ -14,14 +14,6 @@
             <q-icon v-else/>
           </div>
           <div class="text-h6 text-center">{{ hero.name }}</div>
-          <q-btn
-            flat
-            label="Details ›"
-            @click.stop="heroDetailClick"
-            class="text-h6"
-            style="padding: 0; font-size: small;"
-          />
-          
         </q-card-actions>
       </q-card-section>
     </q-card>
@@ -38,10 +30,7 @@ export default {
     },
   },
   methods: {
-    heroDetailClick() {
-      // Placeholder, will eventually trigger Modal
-      alert("Name: " + this.hero.name);
-    },
+    
     selectHero() {
       this.$emit("heroIsActive", this.hero);
     },
