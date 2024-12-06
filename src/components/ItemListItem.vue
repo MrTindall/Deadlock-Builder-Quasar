@@ -57,6 +57,9 @@ export default {
       type: Array,
       required: true,
     },
+    existingItemList: {
+      type: Array,
+    },
     isPickable: Boolean,
   },
   data() {
@@ -72,7 +75,19 @@ export default {
     deleteItem() {
       this.$emit("deleteItem", this.item);
     },
+    setBuiltItems() {
+      existingItemList.forEach(element => {
+        if(element.id === this.item.id) {
+          this.item.isActive = true;
+        }
+      });
+    }
   },
+
+mounted() {
+  // working on this next this may work but havent tested it yet
+  this.setBuiltItems();
+}
 };
 </script>
 

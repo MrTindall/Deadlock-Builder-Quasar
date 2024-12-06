@@ -2,13 +2,19 @@
   <div>
     <div class="text-h6">{{ name }}</div>
     <div>
-      <ItemList :itemList="itemList" :isPickable="isPickable" @itemIsActive="addToBuild" @deleteItem="deleteItem"/>
+      <ItemList
+        :itemList="itemList"
+        :isPickable="isPickable"
+        :existingItemList="existingItemList"
+        @itemIsActive="addToBuild"
+        @deleteItem="deleteItem"
+      />
     </div>
   </div>
 </template>
 
 <script>
-import ItemList from './ItemList.vue';
+import ItemList from "./ItemList.vue";
 
 export default {
   name: "PanelTab",
@@ -23,19 +29,18 @@ export default {
       type: Array,
       required: true,
     },
-    // heroList: {
-    //   type: Array,
-    //   required: true,
-    // },
+    existingItemList: {
+      type: Array,
+    },
     isPickable: Boolean,
   },
   methods: {
     addToBuild(item) {
-     this.$emit("itemIsActive", item);
+      this.$emit("itemIsActive", item);
     },
     deleteItem(item) {
-      this.$emit("deleteItem", item)
+      this.$emit("deleteItem", item);
     },
-  }
+  },
 };
 </script>

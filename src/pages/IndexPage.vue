@@ -95,6 +95,7 @@
 
               <PanelTab
                 :itemList="builtItems"
+                :existingItemList="characterBuilds.itemArray"
                 :is-pickable="true"
                 @deleteItem="deleteItem"
               />
