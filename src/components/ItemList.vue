@@ -9,7 +9,6 @@
         :item="item" 
         :itemList="itemList"
         :isPickable="isPickable"
-        :existingItemList="existingItemList"
         @itemIsActive="addToBuild" 
         @deleteItem="deleteItem" 
       />
@@ -29,9 +28,6 @@ export default {
     itemList: {
       type: Array,
       required: true,
-    },
-    existingItemList: {
-      type: Array,
     },
     isPickable: Boolean,
   },

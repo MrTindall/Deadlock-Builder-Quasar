@@ -38,6 +38,7 @@
               style="width: 100%;"
               
             />
+            <!-- Add function that looks at the selection and set the items to isActive -->
             <q-btn color="primary" label="Build" style="height: 56px; width: 148px; margin-left: 8px; " @click="toggleStartBuild"/>
           </div> 
         </div> 
@@ -95,7 +96,6 @@
 
               <PanelTab
                 :itemList="builtItems"
-                :existingItemList="characterBuilds.itemArray"
                 :is-pickable="true"
                 @deleteItem="deleteItem"
               />
