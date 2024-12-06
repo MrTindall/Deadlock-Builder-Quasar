@@ -8,7 +8,6 @@
       <ItemListItem 
         :item="item" 
         :itemList="itemList"
-        :heroList="heroList"
         :isPickable="isPickable"
         @itemIsActive="addToBuild" 
         @deleteItem="deleteItem" 
@@ -30,10 +29,10 @@ export default {
       type: Array,
       required: true,
     },
-    heroList: {
-      type: Array,
-      required: true,
-    },
+    // heroList: {
+    //   type: Array,
+    //   required: true,
+    // },
     isPickable: Boolean,
   },
   methods: {

@@ -1,6 +1,7 @@
 export default class Build {
-    constructor(name, array) {
-      this.name = name;
+    constructor(heroName,buildName, array) {
+      this.heroName = heroName;
+      this.buildName = buildName;
       this.array = array;
     }
 }

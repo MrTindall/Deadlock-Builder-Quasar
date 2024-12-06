@@ -8,7 +8,7 @@
     <q-card class="item">
       <img :src="item.image" :class="['item-img', item.item_slot_type]" />
       <q-card-section>
-        <p class="flex flex-start">{{ item.name }}</p>
+        <p class="flex flex-start" style="font-size: 1.1rem; margin-bottom: 2px;">{{ item.name }}</p>
         <p class="flex flex-start">Cost: {{ item.cost }}</p>
         <div
           class="button-row"
@@ -85,5 +85,8 @@ export default {
 .q-btn.trash {
   color: rgb(107, 0, 0);
   width: 20px;
+}
+p {
+  font-size: .9rem;
 }
 </style>

@@ -95,7 +95,6 @@
 
               <PanelTab
                 :itemList="builtItems"
-                :heroList="heroRecommendedItems"
                 :is-pickable="true"
                 @deleteItem="deleteItem"
               />
@@ -105,7 +104,6 @@
               <PanelTab
                 :name="'Weapons'"
                 :itemList="weaponItems"
-                :heroList="heroRecommendedItems"
                 :is-pickable="true"
                 @itemIsActive="addToBuild"
                 @deleteItem="deleteItem"
@@ -116,7 +114,6 @@
               <PanelTab
                 :name="'Vitality'"
                 :itemList="vitalityItems"
-                :heroList="heroRecommendedItems"
                 :is-pickable="true"
                 @itemIsActive="addToBuild"
                 @deleteItem="deleteItem"
@@ -127,7 +124,6 @@
               <PanelTab
                 :name="'Spirit'"
                 :itemList="spiritItems"
-                :heroList="heroRecommendedItems"
                 :is-pickable="true"
                 @itemIsActive="addToBuild"
                 @deleteItem="deleteItem"
@@ -164,9 +160,9 @@ const allItems = ref([]);
 let selectedHero = ref("Select a Hero")
 let displayHero = ref([])
 const startBuild = ref(false);
-const buildName = ref('')
+let buildName = ref('')
 const characterBuilds = []
-const model = ref('');
+let model = ref('');
 
 // async functions
 async function getAllItems() {
@@ -245,13 +241,14 @@ function handleTabChange(newTab) {
 function selectHero(hero) {
   if (!hero.isActive) {
     heros.value.forEach((h) => (h.isActive = false));
+    model.value = ''
     hero.isActive = true;
     selectedHero.value = hero.name;
     displayHero.value = hero;
     heroRecommendedItems.value = heros.value.filter((h) => h.name === selectedHero.value);
     heroRecommendedItems.value = heroRecommendedItems.value[0].recommended_upgrades;
     heroRecommendedItems.value = allItems.value.filter(item =>
-      heroRecommendedItems.value.some(name => item.class_name === name)
+    heroRecommendedItems.value.some(name => item.class_name === name)
     );
   } else {
     hero.isActive = false;
@@ -302,17 +299,18 @@ function toggleStartBuild() {
   }
 }
 
-// buildName
 function saveBuild() {
-  // will need to add logic
   const buildArr = allItems.value.filter(item => item.isActive === true);
-  console.log(buildArr)
-  characterBuilds.push(new Build(buildName.value, buildArr))
+  characterBuilds.push(new Build(selectedHero.value, buildName.value, buildArr))
   console.log(characterBuilds);
+  allItems.value.forEach(item => deleteItem(item))
+  buildName.value = ''
   startBuild.value = !startBuild.value;
 }
 
 function cancelBuild() {
+  allItems.value.forEach(item => deleteItem(item))
+  buildName.value = ''
   startBuild.value = !startBuild.value;
 }
 
@@ -340,12 +338,13 @@ const recommendedItems = computed(() => {
 });
 
 const buildOptions = computed(() => {
-  return characterBuilds.map(build => ({
-    label: build.name, // Display name in the dropdown
-    value: build.name, // Value bound to v-model
-  }));
-});
-    
+  return characterBuilds
+    .filter(build => build.heroName === selectedHero.value)
+    .map(build => ({
+      label: build.buildName,
+      value: build.buildName,
+    }));
+}); 
 
 function filterAndSortItems(slotType) {
   return computed(() => {
