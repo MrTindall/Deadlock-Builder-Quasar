@@ -5,8 +5,7 @@ import '@/scss/app.scss';
 import {createApp} from 'vue'
 import App from './App.vue'
 import router from './router'
-import {Notify, Quasar} from 'quasar'
-import '@/libraries/Chart.js';
+import {Quasar} from 'quasar'
 
 
 
