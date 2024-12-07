@@ -52,6 +52,7 @@ module.exports = configure(function (/* ctx */) {
       },
 
       vueRouterMode: 'hash', // available values: 'hash', 'history'
+      publicPath: process.env.NODE_ENV === 'production' ? '/Deadlock-Builder-Quasar/' : '/',
       // vueRouterBase,
       // vueDevtools,
       // vueOptionsAPI: false,
