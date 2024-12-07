@@ -294,8 +294,22 @@ function addDescToItems(itemArr, itemDescArr) {
     }
   });
 }
+
 function toggleStartBuild() {
-  if(selectedHero !== 'Select a Hero') {
+  if (selectedHero !== 'Select a Hero') {
+    const foundItem = characterBuilds?.find((item) => model.value.label === item.buildName);
+
+    if (foundItem) {
+      foundItem.itemArray.forEach((item) => {
+        const existingItem = builtItems.value.find((i) => i.id === item.id);
+        if (existingItem) {
+          existingItem.isActive = true;
+        } else {
+          item.isActive = true;
+          builtItems.value.push(item);
+        }
+      });
+    }
     startBuild.value = !startBuild.value;
   }
 }
@@ -303,7 +317,7 @@ function toggleStartBuild() {
 function saveBuild() {
   const buildArr = allItems.value.filter(item => item.isActive === true);
   characterBuilds.push(new Build(selectedHero.value, buildName.value, buildArr))
-  console.log(characterBuilds);
+  // console.log(characterBuilds);
   allItems.value.forEach(item => deleteItem(item))
   buildName.value = ''
   startBuild.value = !startBuild.value;
