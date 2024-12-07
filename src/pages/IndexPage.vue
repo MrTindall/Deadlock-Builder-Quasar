@@ -375,7 +375,7 @@ function saveBuild() {
   const buildArr = allItems.value.filter(item => item.isActive === true);
   const currentBuild = characterBuilds?.find((item) => model.value.value === item.buildName && model.value.value.toLowerCase() !== 'new build')
   if(currentBuild) {
-      let tempBuildName = currentBuild.buildName;
+      const tempBuildName = currentBuild.buildName;
       characterBuilds?.splice((item) => model.value.value === item.buildName && model.value.value.toLowerCase() !== 'new build')
       characterBuilds.push(new Build(selectedHero.value, tempBuildName, buildArr))
     } else {
