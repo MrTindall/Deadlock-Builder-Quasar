@@ -76,34 +76,52 @@
               <div style="display: flex; flex-direction: row; justify-content: space-between; align-items: center; width: 100%; margin-bottom: 6px;">
                 <h4 style="margin: 0; margin-bottom: 6px;">{{ displayHero.name }}</h4>
                 <div style="display: flex; justify-content: end;">
-                  <div style="display: flex; justify-content: space-between; flex-wrap: wrap; margin-bottom: 15px;">
+                  <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 15px;">
+                  <!-- New Build Section -->
+                  <div v-if="model.value === 'New Build'" style="display: flex; align-items: center; flex-wrap: wrap; gap: 10px;">
                     <q-input
-                      v-if="model.value === 'New Build'"
                       filled
                       v-model="buildName"
                       label="Enter Build Name"
                       label-color="primary"
                       bg-color="primary-dark"
-                      class="q-mr-md"
                       input-style="color: white"
-                      :rules="[ 
+                      :rules="[
                         val => val.length >= 1 || 'Build name must be at least 1 characters',
                         val => val.toLowerCase() !== 'new build' || 'Build name cannot be new build',
                         val => !characterBuilds.some(build => build.heroName === selectedHero && build.buildName === val) || 'Build name already exists for this character'
-                       ]"
+                      ]"
+                      style="flex-grow: 1; min-width: 0; max-width: 70%;"
                     />
 
-                    <!-- This paragraph appears when the buildName is 'New Build' -->
-                    <p v-else style="margin-right: 15px; padding-top: 10px; font-size: 1.5rem;"><strong>Build:</strong> {{ model.value }}</p>
                     <q-btn 
-                      
-                      :disable="buildName === '' || buildName.toLowerCase() === 'new build' || characterBuilds.some(build => build.heroName === selectedHero && build.buildName === buildName)"
-                      color="primary" label="Save" 
-                      style="height: 56px; width: 148px; margin-right: 8px;" 
+                      :disable="buildName === '' || 
+                                buildName.toLowerCase() === 'new build' || 
+                                characterBuilds.some(build => build.heroName === selectedHero && build.buildName === buildName)"
+                      color="primary" 
+                      label="Save" 
+                      style="height: 56px; width: 148px;" 
                       @click="saveBuild"/>
-
-                    <q-btn label="Cancel" style="height: 56px; width: 148px;" @click="cancelBuild"/>
                   </div>
+
+                  <!-- Display Build Name Section -->
+                  <div v-else style="display: flex; align-items: center; gap: 10px;">
+                    <p style="margin-right: 15px; padding-top: 10px; font-size: 1.5rem;">
+                      <strong>Build:</strong> {{ model.value }}
+                    </p>
+                    <q-btn 
+                      color="primary" 
+                      label="Save" 
+                      style="height: 56px; width: 148px;" 
+                      @click="saveBuild"/>
+                  </div>
+
+                  <!-- Cancel Button -->
+                  <q-btn 
+                    label="Cancel" 
+                    style="height: 56px; width: 148px;" 
+                    @click="cancelBuild"/>
+                </div>
                 </div>
                  
               </div>        
@@ -353,8 +371,16 @@ function toggleStartBuild() {
 }
 
 function saveBuild() {
+  
   const buildArr = allItems.value.filter(item => item.isActive === true);
-  characterBuilds.push(new Build(selectedHero.value, buildName.value, buildArr))
+  const currentBuild = characterBuilds?.find((item) => model.value.value === item.buildName && model.value.value.toLowerCase() !== 'new build')
+  if(currentBuild) {
+      console.log(currentBuild)
+      
+    } else {
+      characterBuilds.push(new Build(selectedHero.value, buildName.value, buildArr))
+    }
+  
   // console.log(characterBuilds);
   allItems.value.forEach(item => deleteItem(item))
   buildName.value = ''
