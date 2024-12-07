@@ -195,7 +195,7 @@ let selectedHero = ref("Select a Hero")
 let displayHero = ref([])
 const startBuild = ref(false);
 let buildName = ref('')
-const characterBuilds = [
+let characterBuilds = [
   new Build('Abrams', 'New Build', []),
   new Build('Bebop', 'New Build', []),
   new Build('Dynamo', 'New Build', []),
@@ -236,7 +236,6 @@ async function getAllItems() {
     allItems.value = response.data;
     addIsActive(allItems.value);
     addDescToItems(allItems.value, itemDescriptions)
-    console.log(allItems.value);
   } catch (error) {
     console.error("Error fetching data from Deadlock API:", error);
   } finally {
@@ -258,7 +257,6 @@ async function searchHeros() {
     const response = await axios.get(url, config);
     heros.value = response.data;
     addIsActive(heros.value);
-    console.log(heros.value)
   } catch (error) {
     console.error("Error fetching data from Deadlock API:", error);
   } finally {
@@ -371,20 +369,21 @@ function toggleStartBuild() {
 }
 
 function saveBuild() {
-  
   const buildArr = allItems.value.filter(item => item.isActive === true);
-  const currentBuild = characterBuilds?.find((item) => model.value.value === item.buildName && model.value.value.toLowerCase() !== 'new build')
-  if(currentBuild) {
-      const tempBuildName = currentBuild.buildName;
-      characterBuilds?.splice((item) => model.value.value === item.buildName && model.value.value.toLowerCase() !== 'new build')
-      characterBuilds.push(new Build(selectedHero.value, tempBuildName, buildArr))
-    } else {
-      characterBuilds.push(new Build(selectedHero.value, buildName.value, buildArr))
+  const currentBuild = characterBuilds?.find((item) => item.buildName === model.value.value && model.value.value.toLowerCase() !== 'new build');
+
+  if (currentBuild) {
+    const buildIndex = characterBuilds.findIndex((item) => item.buildName === model.value.value && model.value.value.toLowerCase() !== 'new build');
+    if (buildIndex !== -1) {
+      characterBuilds.splice(buildIndex, 1); 
+
+      characterBuilds.push(new Build(selectedHero.value, currentBuild.buildName, buildArr));
     }
-  
-  // console.log(characterBuilds);
-  allItems.value.forEach(item => deleteItem(item))
-  buildName.value = ''
+  } else {
+    characterBuilds.push(new Build(selectedHero.value, buildName.value, buildArr));
+  }
+  allItems.value.forEach(item => deleteItem(item));
+  buildName.value = '';
   startBuild.value = !startBuild.value;
 }
 
