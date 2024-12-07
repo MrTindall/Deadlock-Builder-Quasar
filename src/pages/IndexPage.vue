@@ -39,7 +39,7 @@
               
             />
             <!-- Add function that looks at the selection and set the items to isActive -->
-            <q-btn color="primary" label="Build" style="height: 56px; width: 148px; margin-left: 8px; " @click="toggleStartBuild"/>
+            <q-btn v-show="model !== ''" color="primary" label="Build" style="height: 56px; width: 148px; margin-left: 8px; " @click="toggleStartBuild"/>
           </div> 
         </div> 
 
@@ -78,6 +78,7 @@
                 <div style="display: flex; justify-content: end;">
                   <div style="display: flex; justify-content: space-between; flex-wrap: wrap; margin-bottom: 15px;">
                     <q-input
+                      v-if="model.value === 'New Build'"
                       filled
                       v-model="buildName"
                       label="Enter Build Name"
@@ -85,8 +86,22 @@
                       bg-color="primary-dark"
                       class="q-mr-md"
                       input-style="color: white"
+                      :rules="[ 
+                        val => val.length >= 1 || 'Build name must be at least 1 characters',
+                        val => val.toLowerCase() !== 'new build' || 'Build name cannot be new build',
+                        val => !characterBuilds.some(build => build.heroName === selectedHero && build.buildName === val) || 'Build name already exists for this character'
+                       ]"
                     />
-                    <q-btn v-show="buildName !== ''" color="primary" label="Save" style="height: 56px; width: 148px;" @click="saveBuild"/>
+
+                    <!-- This paragraph appears when the buildName is 'New Build' -->
+                    <p v-else style="margin-right: 15px; padding-top: 10px; font-size: 1.5rem;"><strong>Build:</strong> {{ model.value }}</p>
+                    <q-btn 
+                      
+                      :disable="buildName === '' || model.value === 'New Build'"
+                      color="primary" label="Save" 
+                      style="height: 56px; width: 148px; margin-right: 8px;" 
+                      @click="saveBuild"/>
+
                     <q-btn label="Cancel" style="height: 56px; width: 148px;" @click="cancelBuild"/>
                   </div>
                 </div>
@@ -162,7 +177,30 @@ let selectedHero = ref("Select a Hero")
 let displayHero = ref([])
 const startBuild = ref(false);
 let buildName = ref('')
-const characterBuilds = []
+const characterBuilds = [
+  new Build('Abrams', 'New Build', []),
+  new Build('Bebop', 'New Build', []),
+  new Build('Dynamo', 'New Build', []),
+  new Build('Grey Talon', 'New Build', []),
+  new Build('Haze', 'New Build', []),
+  new Build('Infernus', 'New Build', []),
+  new Build('Ivy', 'New Build', []),
+  new Build('Kelvin', 'New Build', []),
+  new Build('Lady Geist', 'New Build', []),
+  new Build('Lash', 'New Build', []),
+  new Build('McGinnis', 'New Build', []),
+  new Build('Mirage', 'New Build', []),
+  new Build('Mo & Krill', 'New Build', []),
+  new Build('Paradox', 'New Build', []),
+  new Build('Pocket', 'New Build', []),
+  new Build('Seven', 'New Build', []),
+  new Build('Shiv', 'New Build', []),
+  new Build('Vindicta', 'New Build', []),
+  new Build('Viscous', 'New Build', []),
+  new Build('Warden', 'New Build', []),
+  new Build('Wraith', 'New Build', []),
+  new Build('Yamato', 'New Build', []),
+]
 let model = ref('');
 
 // async functions
@@ -485,6 +523,9 @@ const itemDescriptions = [
 .q-menu{
   color: white;
   background-color: $primary-dark;
+}
+strong {
+  color: $primary-light;
 }
 
 </style>
