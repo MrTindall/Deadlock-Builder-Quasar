@@ -97,7 +97,7 @@
                     <p v-else style="margin-right: 15px; padding-top: 10px; font-size: 1.5rem;"><strong>Build:</strong> {{ model.value }}</p>
                     <q-btn 
                       
-                      :disable="buildName === '' || model.value === 'New Build'"
+                      :disable="buildName === '' || buildName.toLowerCase() === 'new build' || characterBuilds.some(build => build.heroName === selectedHero && build.buildName === buildName)"
                       color="primary" label="Save" 
                       style="height: 56px; width: 148px; margin-right: 8px;" 
                       @click="saveBuild"/>
