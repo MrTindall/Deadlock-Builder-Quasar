@@ -43,7 +43,8 @@ module.exports = configure(function (/* ctx */) {
       'roboto-font', // optional, you are not bound to it
       'material-icons', // optional, you are not bound to it
     ],
-
+    boot: ['axios'],
+    css: ['app.scss'],
     // Full list of options: https://v2.quasar.dev/quasar-cli-vite/quasar-config-js#build
     build: {
       target: {
@@ -51,8 +52,8 @@ module.exports = configure(function (/* ctx */) {
         node: 'node20'
       },
 
-      vueRouterMode: 'hash', // available values: 'hash', 'history'
-      // publicPath: process.env.NODE_ENV === 'production' ? '/Deadlock-Builder-Quasar/' : '/',
+      vueRouterMode: 'history', // available values: 'hash', 'history'
+      publicPath: process.env.NODE_ENV === 'production' ? '/Deadlock-Builder-Quasar/' : '/',
       // vueRouterBase,
       // vueDevtools,
       // vueOptionsAPI: false,
