@@ -371,10 +371,8 @@ function toggleStartBuild() {
 function saveBuild() {
   const buildArr = allItems.value.filter(item => item.isActive === true);
   const currentBuild = characterBuilds?.find((item) => item.heroName === selectedHero.value && item.buildName === model.value.value && model.value.value.toLowerCase() !== 'new build');
-  console.log(currentBuild)
   if (currentBuild) {
     const buildIndex = characterBuilds.findIndex((item) => item.heroName === currentBuild.heroName && item.buildName === model.value.value && model.value.value.toLowerCase() !== 'new build');
-    console.log(buildIndex)
     if (buildIndex !== -1) {
       characterBuilds.splice(buildIndex, 1); 
 
