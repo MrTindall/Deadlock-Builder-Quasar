@@ -89,7 +89,7 @@
                       :rules="[
                         val => val.length >= 1 || 'Build name must be at least 1 characters',
                         val => val.toLowerCase() !== 'new build' || 'Build name cannot be new build',
-                        val => !characterBuilds.some(build => build.buildName === val) || 'Build name already exists for this character or another character'
+                        val => !characterBuilds.some(build => build.heroName === selectedHero && build.buildName === val) || 'Build name already exists for this character'
                       ]"
                       style="flex-grow: 1; min-width: 0; max-width: 70%;"
                     />
@@ -97,7 +97,7 @@
                     <q-btn 
                       :disable="buildName === '' || 
                                 buildName.toLowerCase() === 'new build' || 
-                                characterBuilds.some(build => build.buildName === buildName)"
+                                characterBuilds.some(build => build.heroName === selectedHero && build.buildName === buildName)"
                       color="primary" 
                       label="Save" 
                       style="height: 56px; width: 148px;" 
@@ -351,7 +351,7 @@ function addDescToItems(itemArr, itemDescArr) {
 
 function toggleStartBuild() {
   if (selectedHero !== 'Select a Hero') {
-    const foundItem = characterBuilds?.find((item) => model.value.label === item.buildName);
+    const foundItem = characterBuilds?.find((item) => model.value.label === item.buildName && item.heroName === selectedHero.value);
 
     if (foundItem) {
       foundItem.itemArray.forEach((item) => {
@@ -371,13 +371,14 @@ function toggleStartBuild() {
 function saveBuild() {
   const buildArr = allItems.value.filter(item => item.isActive === true);
   const currentBuild = characterBuilds?.find((item) => item.heroName === selectedHero.value && item.buildName === model.value.value && model.value.value.toLowerCase() !== 'new build');
-
+  console.log(currentBuild)
   if (currentBuild) {
-    const buildIndex = characterBuilds.findIndex((item) => item.heroName === selectedHero.value && item.buildName === model.value.value && model.value.value.toLowerCase() !== 'new build');
+    const buildIndex = characterBuilds.findIndex((item) => item.heroName === currentBuild.heroName && item.buildName === model.value.value && model.value.value.toLowerCase() !== 'new build');
+    console.log(buildIndex)
     if (buildIndex !== -1) {
       characterBuilds.splice(buildIndex, 1); 
 
-      characterBuilds.push(new Build(selectedHero.value, currentBuild.buildName, buildArr));
+      characterBuilds.push(new Build(currentBuild.heroName, currentBuild.buildName, buildArr));
     }
   } else {
     characterBuilds.push(new Build(selectedHero.value, buildName.value, buildArr));
