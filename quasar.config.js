@@ -20,9 +20,6 @@ module.exports = configure(function (/* ctx */) {
     // app boot file (/src/boot)
     // --> boot files are part of "main.js"
     // https://v2.quasar.dev/quasar-cli-vite/boot-files
-    extendViteConf(viteConf) {
-      viteConf.base = '/'
-    },
     boot: [
       
       'axios',
