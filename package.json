@@ -4,7 +4,7 @@
   "description": "An app to create Deadlock builds",
   "productName": "Deadlock Builder App",
   "author": "Alex Tindall <tindall.al@gmail.com>",
-  "private": true,
+  "private": false,
   "scripts": {
     "test": "echo \"No test specified\" && exit 0",
     "dev": "quasar dev",
