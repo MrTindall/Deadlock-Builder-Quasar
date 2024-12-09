@@ -89,7 +89,7 @@
                       :rules="[
                         val => val.length >= 1 || 'Build name must be at least 1 characters',
                         val => val.toLowerCase() !== 'new build' || 'Build name cannot be new build',
-                        val => !characterBuilds.some(build => build.heroName === selectedHero && build.buildName === val) || 'Build name already exists for this character'
+                        val => !characterBuilds.some(build => build.heroName === selectedHero && build.buildName.toLowerCase() === val.toLowerCase()) || 'Build name already exists for this character'
                       ]"
                       style="flex-grow: 1; min-width: 0; max-width: 70%;"
                     />
@@ -97,7 +97,7 @@
                     <q-btn 
                       :disable="buildName === '' || 
                                 buildName.toLowerCase() === 'new build' || 
-                                characterBuilds.some(build => build.heroName === selectedHero && build.buildName === buildName)"
+                                characterBuilds.some(build => build.heroName === selectedHero && build.buildName.toLowerCase() === buildName.toLowerCase())"
                       color="primary" 
                       label="Save" 
                       style="height: 56px; width: 148px;" 
