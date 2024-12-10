@@ -445,11 +445,11 @@ function deleteBuild() {
 
     if (buildIndex !== -1) {
       characterBuilds.splice(buildIndex, 1); 
+      allItems.value.forEach(item => deleteItem(item));
+      heros.value.forEach((h) => (h.isActive = false));
+      selectedHero.value = "Select a Hero";
     }
   }
-
-  heros.value.forEach((h) => (h.isActive = false));
-  selectedHero.value = "Select a Hero";
   startBuild.value = !startBuild.value;
 }
 
