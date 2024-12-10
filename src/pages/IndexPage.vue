@@ -384,6 +384,12 @@ function saveBuild() {
   allItems.value.forEach(item => deleteItem(item));
   buildName.value = '';
   startBuild.value = !startBuild.value;
+
+  const tempHero = selectedHero.value;
+  selectedHero.value = null;
+  setTimeout(() => {
+    selectedHero.value = tempHero;
+  });
 }
 
 function cancelBuild() {
