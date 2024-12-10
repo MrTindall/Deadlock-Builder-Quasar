@@ -37,9 +37,8 @@
       v-model="model" 
       :options="buildOptions" 
       label="Select a Build" 
-      bg-color="primary" 
-      color="white"
-      label-color="white"
+      bg-color="dark" 
+      label-color="primary"
       style="flex: 1; min-width: 200px; max-width: 400px;"
     />
     <q-btn 
@@ -613,5 +612,7 @@ const itemDescriptions = [
 strong {
   color: $primary-light;
 }
-
+span {
+  color: white;
+}
 </style>
