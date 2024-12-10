@@ -51,14 +51,15 @@ module.exports = configure(function (/* ctx */) {
       },
 
       vueRouterMode: 'hash', // available values: 'hash', 'history'
-      publicPath: process.env.NODE_ENV === 'production' ? '/Deadlock-Builder-Quasar/' : '/',
+      // publicPath: process.env.NODE_ENV === 'production' ? '/Deadlock-Builder-Quasar/' : '/',
       // vueRouterBase,
       // vueDevtools,
       // vueOptionsAPI: false,
 
       // rebuildCache: true, // rebuilds Vite/linter/etc cache on startup
-
-      // publicPath: '/',
+    
+      publicPath: '',
+      appBase: '',
       // analyze: true,
       // env: {},
       // rawDefine: {}
