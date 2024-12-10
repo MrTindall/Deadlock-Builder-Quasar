@@ -24,24 +24,33 @@
         <div class="primaryColorBar">
           Hero Details
         </div>
-        <div  style="display: flex; flex-direction: row; justify-content: space-between; align-items: center; width: 100%; margin-bottom: 6px; padding: 10px;">
-          <h4 style="margin: 0;">{{ selectedHero }}</h4>
-          <div style="min-width: 200px; width: 400px; display: flex; flex-direction: row; justify-content: space-between; align-items: center;" v-if="selectedHero !== 'Select a Hero'">
-            <q-select 
-              filled 
-              v-model="model" 
-              :options="buildOptions" 
-              label="Select a Build" 
-              bg-color="primary" 
-              color="white"
-              label-color="white"
-              style="width: 100%;"
-              
-            />
-            <!-- Add function that looks at the selection and set the items to isActive -->
-            <q-btn v-show="model !== ''" color="primary" label="Build" style="height: 56px; width: 148px; margin-left: 8px; " @click="toggleStartBuild"/>
-          </div> 
-        </div> 
+        <div 
+  style="display: flex; flex-direction: column; width: 100%; margin-bottom: 6px; padding: 10px;"
+>
+  <h4 style="margin: 0; text-align: start;">{{ selectedHero }}</h4>
+  <div 
+    style="display: flex; flex-wrap: wrap; flex-direction: row; justify-content: start; align-items: center; gap: 8px; margin-top: 10px;" 
+    v-if="selectedHero !== 'Select a Hero'"
+  >
+    <q-select 
+      filled 
+      v-model="model" 
+      :options="buildOptions" 
+      label="Select a Build" 
+      bg-color="primary" 
+      color="white"
+      label-color="white"
+      style="flex: 1; min-width: 200px; max-width: 400px;"
+    />
+    <q-btn 
+      v-show="model !== ''" 
+      color="primary" 
+      label="Build" 
+      style="height: 56px; flex: 0 1 auto; width: 100%; max-width: 148px;" 
+      @click="toggleStartBuild"
+    />
+  </div> 
+</div> 
 
         <!-- first page content -->
         <div v-show="selectedHero !== 'Select a Hero'" class="q-pa-md">
