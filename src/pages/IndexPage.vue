@@ -29,7 +29,7 @@
 >
   <h4 style="margin: 0; text-align: start;">{{ selectedHero }}</h4>
   <div 
-    style="display: flex; flex-wrap: wrap; flex-direction: row; justify-content: start; align-items: center; gap: 8px; margin-top: 10px;" 
+    style="display: flex; flex-wrap: wrap; flex-direction: row; justify-content: end; align-items: center; gap: 8px; margin-top: 10px;" 
     v-if="selectedHero !== 'Select a Hero'"
   >
     <q-select 
@@ -89,13 +89,12 @@
                   <!-- New Build Section -->
                   <div 
                     v-if="model.value === 'New Build'" 
-                    style="display: flex; flex-wrap: wrap; gap: 10px; align-items: flex-start; width: 100%;"
+                    style="display: flex; flex-wrap: wrap; gap: 10px; align-items: flex-start; justify-content: end; width: 100%;"
                   >
                     <q-input
                       filled
                       v-model="buildName"
                       label="Enter Build Name"
-                      
                       label-color="primary"
                       bg-color="dark"
                       input-style="color: white"
@@ -104,7 +103,7 @@
                         val => val.toLowerCase() !== 'new build' || 'Build name cannot be new build',
                         val => !characterBuilds.some(build => build.heroName.toLowerCase() === selectedHero.toLowerCase() && build.buildName.toLowerCase() === val.toLowerCase()) || 'Build name already exists for this character'
                       ]"
-                      style="flex-grow: 1; min-width: 0; max-width: 100%;"
+                      style="max-width: 400px; width: 100%;"
                     />
 
                     <div style="display: flex; flex-direction: column; gap: 10px; width: 100%; max-width: 148px;">
