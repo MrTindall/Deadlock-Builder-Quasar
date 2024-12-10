@@ -132,6 +132,13 @@
                         @click="saveBuild"
                       />
                       <q-btn 
+                        v-show="model.value.toLowerCase() !== 'New Build'"
+                        label="Delete" 
+                        color="red" 
+                        style="width: 100%;" 
+                        @click="deleteBuild"
+                      />
+                      <q-btn 
                         label="Cancel" 
                         color="dark" 
                         style="width: 100%;" 
@@ -412,6 +419,29 @@ function saveBuild() {
 function cancelBuild() {
   allItems.value.forEach(item => deleteItem(item))
   buildName.value = ''
+  startBuild.value = !startBuild.value;
+}
+
+function deleteBuild() {
+  const currentBuild = characterBuilds?.find((item) => 
+    item.heroName === selectedHero.value && 
+    item.buildName === model.value.value && 
+    model.value.value.toLowerCase() !== 'new build'
+  );
+
+  if (currentBuild) {
+    const buildIndex = characterBuilds.findIndex((item) => 
+      item.heroName === currentBuild.heroName && 
+      item.buildName === currentBuild.buildName
+    );
+
+    if (buildIndex !== -1) {
+      characterBuilds.splice(buildIndex, 1); 
+    }
+  }
+
+  heros.value.forEach((h) => (h.isActive = false));
+  selectedHero.value = "Select a Hero";
   startBuild.value = !startBuild.value;
 }
 
