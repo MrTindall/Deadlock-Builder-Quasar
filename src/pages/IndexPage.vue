@@ -73,58 +73,75 @@
           <q-tab-panels v-model="tab" animated>
             <q-tab-panel name="build">
             <div style="display: flex; justify-content: space-between; flex-wrap: wrap; margin-bottom: 15px;">
-              <div style="display: flex; flex-direction: row; justify-content: space-between; align-items: center; width: 100%; margin-bottom: 6px;">
-                <h4 style="margin: 0; margin-bottom: 6px;">{{ displayHero.name }}</h4>
-                <div style="display: flex; justify-content: end;">
-                  <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 15px;">
+              <div style="display: flex; flex-direction: column; justify-content: space-between; align-items: flex-start; width: 100%; margin-bottom: 6px;"
+            >
+              <h4 style="margin: 0; margin-bottom: 6px;">{{ displayHero.name }}</h4>
+                <div style="display: flex; flex-direction: column; width: 100%;">
                   <!-- New Build Section -->
-                  <div v-if="model.value === 'New Build'" style="display: flex; align-items: center; flex-wrap: wrap; gap: 10px;">
+                  <div 
+                    v-if="model.value === 'New Build'" 
+                    style="display: flex; flex-wrap: wrap; gap: 10px; align-items: flex-start; width: 100%;"
+                  >
                     <q-input
                       filled
                       v-model="buildName"
                       label="Enter Build Name"
+                      
                       label-color="primary"
-                      bg-color="primary-dark"
+                      bg-color="dark"
                       input-style="color: white"
-                      :rules="[
+                      :rules="[ 
                         val => val.length >= 1 || 'Build name must be at least 1 characters',
                         val => val.toLowerCase() !== 'new build' || 'Build name cannot be new build',
                         val => !characterBuilds.some(build => build.heroName.toLowerCase() === selectedHero.toLowerCase() && build.buildName.toLowerCase() === val.toLowerCase()) || 'Build name already exists for this character'
                       ]"
-                      style="flex-grow: 1; min-width: 0; max-width: 70%;"
+                      style="flex-grow: 1; min-width: 0; max-width: 100%;"
                     />
 
-                    <q-btn 
-                      :disable="buildName === '' || 
-                                buildName.toLowerCase() === 'new build' || 
-                                characterBuilds.some(build => build.heroName.toLowerCase() === selectedHero.toLowerCase() && build.buildName.toLowerCase() === buildName.toLowerCase())"
-                      color="primary" 
-                      label="Save" 
-                      style="height: 56px; width: 148px;" 
-                      @click="saveBuild"/>
+                    <div style="display: flex; flex-direction: column; gap: 10px; width: 100%; max-width: 148px;">
+                      <q-btn 
+                        :disable="buildName === '' || 
+                                  buildName.toLowerCase() === 'new build' || 
+                                  characterBuilds.some(build => build.heroName.toLowerCase() === selectedHero.toLowerCase() && build.buildName.toLowerCase() === buildName.toLowerCase())"
+                        color="primary" 
+                        label="Save" 
+                        style="width: 100%;" 
+                        @click="saveBuild"
+                      />
+                      <q-btn 
+                        label="Cancel" 
+                        color="dark" 
+                        style="width: 100%;" 
+                        @click="cancelBuild"
+                      />
+                    </div>
                   </div>
 
                   <!-- Display Build Name Section -->
-                  <div v-else style="display: flex; align-items: center; gap: 10px;">
-                    <p style="margin-right: 15px; padding-top: 10px; font-size: 1.5rem;">
+                  <div v-else style="display: flex; flex-wrap: wrap; gap: 10px; align-items: flex-start; width: 100%;">
+                    <p style="margin: 0; padding: 10px 0; font-size: 1.5rem;">
                       <strong>Build:</strong> {{ model.value }}
                     </p>
-                    <q-btn 
-                      color="primary" 
-                      label="Save" 
-                      style="height: 56px; width: 148px;" 
-                      @click="saveBuild"/>
+                    <div 
+                      style="display: flex; flex-direction: column; gap: 10px; width: 100%; max-width: 148px; margin-left: auto;"
+                    >
+                      <q-btn 
+                        color="primary" 
+                        label="Save" 
+                        style="width: 100%;" 
+                        @click="saveBuild"
+                      />
+                      <q-btn 
+                        label="Cancel" 
+                        color="dark" 
+                        style="width: 100%;" 
+                        @click="cancelBuild"
+                      />
+                    </div>
                   </div>
-
-                  <!-- Cancel Button -->
-                  <q-btn 
-                    label="Cancel" 
-                    style="height: 56px; width: 148px;" 
-                    @click="cancelBuild"/>
                 </div>
-                </div>
-                 
-              </div>        
+              </div>
+       
             </div>
 
               <PanelTab
