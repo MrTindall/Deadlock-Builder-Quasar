@@ -612,7 +612,7 @@ const itemDescriptions = [
 strong {
   color: $primary-light;
 }
-span {
+.q-select span {
   color: white;
 }
 </style>
