@@ -155,10 +155,11 @@
                     </div>
                   </div>
                 </div>
-                <ConfirmModal 
-                  v-model="confirmDelete"
-                  @removeBuild="deleteBuild"
-                />
+                <ConfirmModal v-model="confirmDelete" @removeBuild="deleteBuild">
+                  <template v-slot:header>
+                    <h6>Are you sure you want to delete this build?</h6>
+                  </template>
+                </ConfirmModal>
               </div>
               
        

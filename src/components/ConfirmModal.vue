@@ -4,8 +4,7 @@
       <q-card-section
         style="justify-content: space-between;">
         <div style="display: flex; justify-content: center;">
-          <h6>Are you sure you want to delete this build?</h6>
-
+           <slot name="header"></slot>
         </div>
       </q-card-section>
       <q-card-actions class="flex justify-end">
@@ -17,8 +16,6 @@
     </q-card>
   </q-dialog>
 </template>
-
-
 
 <script>
 export default {
