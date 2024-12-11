@@ -32,6 +32,12 @@
           "
         >
           <h4 style="margin: 0; text-align: start">{{ selectedHero }}</h4>
+          <div v-if="selectedHero === 'Select a Hero'" class="q-mt-md" >
+            <p style="font-size: 2rem;">
+              Beginner friendly <q-icon name="thumb_up" class="primaryColor"/>
+            </p>
+          </div>
+          
           <div
             style="
               display: flex;
@@ -1092,5 +1098,9 @@ strong {
 }
 .q-select span {
   color: white;
+}
+
+.primaryColor {
+  color: $primary;
 }
 </style>
