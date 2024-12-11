@@ -331,6 +331,8 @@ let displayHero = ref([]);
 const startBuild = ref(false);
 let buildName = ref("");
 let confirmDelete = ref(false);
+
+// Temp until I set up firebase, after it will not be needed
 let characterBuilds = [
   new Build("Abrams", "New Build", []),
   new Build("Bebop", "New Build", []),
