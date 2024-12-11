@@ -143,8 +143,9 @@
                         label="Delete" 
                         color="red" 
                         style="width: 100%;" 
-                        @click="deleteBuild"
+                        @click="confirmDelete = !confirmDelete"
                       />
+                      
                       <q-btn 
                         label="Cancel" 
                         color="dark" 
@@ -154,7 +155,12 @@
                     </div>
                   </div>
                 </div>
+                <ConfirmModal 
+                  v-model="confirmDelete"
+                  @removeBuild="deleteBuild"
+                />
               </div>
+              
        
             </div>
 
@@ -207,6 +213,7 @@ import { ref, computed, onMounted } from "vue";
 import axios from "axios";
 import PanelTab from "src/components/PanelTab.vue";
 import HeroList from "src/components/HeroList.vue";
+import ConfirmModal from "src/components/ConfirmModal.vue";
 import Build from "src/models/Build.js"
 import { data } from "autoprefixer";
 
@@ -226,6 +233,7 @@ let selectedHero = ref("Select a Hero")
 let displayHero = ref([])
 const startBuild = ref(false);
 let buildName = ref('')
+let confirmDelete = ref(false);
 let characterBuilds = [
   new Build('Abrams', 'New Build', []),
   new Build('Bebop', 'New Build', []),
