@@ -318,7 +318,7 @@ defineOptions({
   name: "IndexPage",
 });
 
-// Variables
+// Data ref variables
 const leftDrawerOpen = ref(false);
 const items = ref([]);
 const heros = ref([]);
@@ -358,6 +358,7 @@ let characterBuilds = [
 let model = ref("");
 
 // async functions
+// Grabs all item object data from api endpoint
 async function getAllItems() {
   let url = `https://assets.deadlock-api.com/v2/items`;
   let config = {
@@ -379,6 +380,7 @@ async function getAllItems() {
   }
 }
 
+// Grabs all hero object data from api endpoint
 async function searchHeros() {
   let url = "https://assets.deadlock-api.com/v2/heroes";
   let config = {
@@ -411,6 +413,7 @@ function toggleLeftDrawer() {
   leftDrawerOpen.value = !leftDrawerOpen.value;
 }
 
+// changes between tab panels
 function handleTabChange(newTab) {
   const slotTypeMapping = {
     build: "builder",
@@ -429,6 +432,7 @@ function handleTabChange(newTab) {
   }
 }
 
+// Selects hero by setting all heros.isActive bit to false and sets selected hero.isActive to true
 function selectHero(hero) {
   if (!hero.isActive) {
     heros.value.forEach((h) => (h.isActive = false));
@@ -451,6 +455,7 @@ function selectHero(hero) {
   }
 }
 
+// adds item to current build by settin isActive value on object
 function addToBuild(item) {
   const foundItem = items.value.find((i) => i.id === item.id);
   if (foundItem) {
@@ -474,6 +479,8 @@ function deleteItem(item) {
     foundItem.isActive = false;
   }
 }
+
+// Adds descriptions to the items array
 function addDescToItems(itemArr, itemDescArr) {
   itemDescArr.forEach((item) => {
     const foundItem = itemArr.find((i) => i.class_name === item.name);
@@ -587,7 +594,6 @@ onMounted(() => {
 });
 
 // Computed Properties
-
 const filteredHeros = computed(() => {
   return heros.value
     .filter((hero) => hero.in_development === false)
@@ -629,6 +635,8 @@ const weaponItems = filterAndSortItems("weapon");
 const vitalityItems = filterAndSortItems("vitality");
 const spiritItems = filterAndSortItems("spirit");
 
+// The api didnt have the written descriptions for the items
+// If they add it later I will refactor my code to not use this
 const itemDescriptions = [
   {
     name: "upgrade_close_range",
