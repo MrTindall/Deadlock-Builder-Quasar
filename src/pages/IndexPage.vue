@@ -161,8 +161,6 @@
                   </template>
                 </ConfirmModal>
               </div>
-              
-       
             </div>
 
               <PanelTab
