@@ -331,6 +331,9 @@ let displayHero = ref([]);
 const startBuild = ref(false);
 let buildName = ref("");
 let confirmDelete = ref(false);
+
+// Temp until I get firebase database set up
+// Each character will have a New Build Build
 let characterBuilds = [
   new Build("Abrams", "New Build", []),
   new Build("Bebop", "New Build", []),
@@ -456,6 +459,7 @@ function selectHero(hero) {
 }
 
 // adds item to current build by settin isActive value on object
+// From emit
 function addToBuild(item) {
   const foundItem = items.value.find((i) => i.id === item.id);
   if (foundItem) {
@@ -468,6 +472,7 @@ function addToBuild(item) {
   }
 }
 
+// From emit
 function deleteItem(item) {
   const index = builtItems.value.findIndex((i) => i.id === item.id);
   if (index !== -1) {
@@ -481,6 +486,7 @@ function deleteItem(item) {
 }
 
 // Adds descriptions to the items array
+// Will be unneeded once api updates with item descriptions
 function addDescToItems(itemArr, itemDescArr) {
   itemDescArr.forEach((item) => {
     const foundItem = itemArr.find((i) => i.class_name === item.name);
@@ -594,12 +600,14 @@ onMounted(() => {
 });
 
 // Computed Properties
+// Removes unplayable characters and sorts them by name
 const filteredHeros = computed(() => {
   return heros.value
     .filter((hero) => hero.in_development === false)
     .sort((a, b) => a.name.localeCompare(b.name));
 });
 
+// list of recommended items for Heros
 const recommendedItems = computed(() => {
   return heroRecommendedItems.value.sort((a, b) => {
     const costDifference = a.cost - b.cost;
@@ -607,6 +615,7 @@ const recommendedItems = computed(() => {
   });
 });
 
+// Maps the select the the correct heros builds
 const buildOptions = computed(() => {
   return characterBuilds
     .filter((build) => build.heroName === selectedHero.value)
@@ -616,6 +625,7 @@ const buildOptions = computed(() => {
     }));
 });
 
+// Function to filter items based on slotType
 function filterAndSortItems(slotType) {
   return computed(() => {
     return allItems.value
@@ -631,6 +641,7 @@ function filterAndSortItems(slotType) {
   });
 }
 
+// function call for each slotType
 const weaponItems = filterAndSortItems("weapon");
 const vitalityItems = filterAndSortItems("vitality");
 const spiritItems = filterAndSortItems("spirit");
@@ -1096,7 +1107,6 @@ const itemDescriptions = [
 p {
   font-size: 1.2rem;
 }
-
 .q-menu {
   color: white;
   background-color: $primary-dark;
