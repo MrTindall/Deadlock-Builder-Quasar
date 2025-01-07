@@ -648,7 +648,6 @@ const spiritItems = filterAndSortItems("spirit");
 
 // The api didnt have the written descriptions for the items
 // If they add it later I will refactor my code to not use this
-// Again Tyler This is a temp solution temporary, please overlook this for now
 const itemDescriptions = [
   {
     name: "upgrade_close_range",
